@@ -1,9 +1,12 @@
 
 
+import Home from "../src/components/home"
+
 const Index = () => {
+
   return (
     <>
-      <h1>Hello Spotifinders!👋</h1>
+      <Home/>
     </>
   )
 }
