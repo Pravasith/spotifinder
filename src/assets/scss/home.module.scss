@@ -1,10 +1,16 @@
+@import "./libs/_vars";
+@import "./libs/_mixins";
+
+
 
 .container{
     position: absolute;
 
-    background: pink;
+    // background: pink;
     width: 100%;
     height: 50vh;
+
+
 }
 
 
