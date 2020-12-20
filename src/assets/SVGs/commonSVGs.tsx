@@ -22,3 +22,38 @@ export const SearchIcon = () => (
         </g>
     </svg>
 )
+
+
+
+export const DurationIcon = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        x="0"
+        y="0"
+        enableBackground="new 0 0 29 29"
+        version="1.1"
+        viewBox="0 0 29 29"
+        xmlSpace="preserve"
+        >
+        <circle
+            cx="14.5"
+            cy="14.5"
+            r="13"
+            fill="none"
+            stroke="#0FF"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeMiterlimit="10"
+            strokeWidth="3"
+        ></circle>
+        <path
+            fill="none"
+            stroke="#0FF"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeMiterlimit="10"
+            strokeWidth="3"
+            d="M14.5 6.6L14.5 14.5 20.5 14.5"
+        ></path>
+    </svg>
+)

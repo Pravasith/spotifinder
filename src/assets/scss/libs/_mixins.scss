@@ -21,3 +21,8 @@
     align-items: center;
 }
 
+
+@mixin blurredBackdrop{
+    background: $transparentWhite;
+    backdrop-filter: blur(4px);
+}
