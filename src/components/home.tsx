@@ -17,7 +17,9 @@ const Home = () => {
 
     return (
         <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
-            <Search/>
+            <div className={ `${styles.searchWrap}` }>
+                <Search/>
+            </div>
         </div>
     )
 }

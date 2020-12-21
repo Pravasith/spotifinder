@@ -16,11 +16,9 @@ const Search = () => {
 
     useEffect(() => {
         // Calculates height of suggestionsWrap element
-        const h: string = (window.innerHeight - wrap.current.offsetTop) + 'px'
+        const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
+        const h = (window.innerHeight -offsetTopRelativeToViewport) + 'px'
         setHeight(h)
-
-        console.log(h)
-
     }, [])
 
     // useEffect(() => {
@@ -38,7 +36,7 @@ const Search = () => {
                 key={`suggestion-${i}`}
                 >
                 <img 
-                    src="https://instagram.flwo4-2.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/123207065_2588720941388448_6311789914010059318_n.jpg?_nc_ht=instagram.flwo4-2.fna.fbcdn.net&_nc_cat=100&_nc_ohc=R7oEd_iYN-UAX9rmDmy&tp=1&oh=030738aac6f6cc9015f9aa599867aea1&oe=6006DBC2" 
+                    src="https://lh3.googleusercontent.com/a-/AOh14Gh0uJ6w9eS22YnV9mBkq5ZnmniEnrPuuWf4R6p1Zg=s70-p-k-rw-no" 
                     alt=""
                 />
 

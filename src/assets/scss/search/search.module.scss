@@ -57,7 +57,7 @@
         top: 100%;
         padding: 1em 4em;
         overflow-y: auto;
-        height: 100vh;
+        // height: 100vh;
     }
 
     
@@ -94,8 +94,8 @@
 
     img{
         border-radius: 0.5em;
-        width: 2.8em;
-        height: 2.8em;
+        min-width: 2.8em;
+        min-height: 2.8em;
         margin-right: 0.5em;
     }
 
