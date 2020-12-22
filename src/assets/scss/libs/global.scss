@@ -105,7 +105,7 @@ h2{
 	font-family: "Calibre", sans-serif;
 	
 	font-size: 1.5em;
-	line-height: 1em;
+	line-height: 1.25em;
 	font-weight: 400;
 	color: $darkerGray;
 	margin: 0;
@@ -120,7 +120,15 @@ h2{
 	}
 }
 
-
+h3{
+	font-family: "Calibre", sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	font-weight: 500;
+	line-height: 1.2em;
+	color: $pureWhite;
+}
 
 p{
 	font-family: "Calibre", sans-serif;

@@ -20,7 +20,7 @@ const Navbar = () => {
                         Hello
                     </button>
 
-                    <Search/>
+                    {/* <Search showAside={'hide'}/> */}
                 </div>
             </nav>
 

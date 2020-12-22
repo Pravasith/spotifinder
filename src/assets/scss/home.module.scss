@@ -13,8 +13,22 @@
     .searchWrap{
         padding-top: 20vh;
         width: 100%;
+        height: fit-content;
+
+        z-index: 1;
     }
 
+
+    .vinyl{
+        width: 30%;
+    }
+
+    .vinylIcons{
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
 }
 

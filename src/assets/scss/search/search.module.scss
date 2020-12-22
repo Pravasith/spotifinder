@@ -5,16 +5,42 @@
 
 .container{
     width: 100%;
-    
 
     .searchWrap{
         width: 100%;
-        
+    }
+
+    .showAside{
+        width: 5%;
+        height: 100%;
+        @include blurredBackdrop;
+    }
+
+    .suggestionsContainer{
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .gridder{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hide{
+        display: none;
+    }
+
+    .suggestions{
+        width: 100%;
+        // background: beige;
     }
 
     .searchInputWrap{
         width: 100%;
-        height: 4em;
+        height: 5em;
     }
 
     .searchIcon{
@@ -32,8 +58,8 @@
         outline: none;
         border: none;
 
-        padding: 0 0.2em;
-        
+        padding: 0 0.5em;
+
         color: $secondaryHighlight;
 
     }
@@ -55,7 +81,7 @@
         width: 100%;
         @include blurredBackdrop;
         top: 100%;
-        padding: 1em 4em;
+        padding: 0 4em;
         overflow-y: auto;
         // height: 100vh;
     }
@@ -67,14 +93,24 @@
         margin-bottom: 1em;
         width: 100%;
 
+        padding: 0 0.5em;
+        padding-right: 2em;
+
+        // &:nth-child(odd){
+        //     padding-right: 1em;
+        //     // background: yellow;
+        // }
+        
     }
 
     .suggestionLabel{
-        font-size: 1.15em;
+        color: $pureWhite;
+        // font-size: 1.15em;
+        font-size: 1.55em;
         font-weight: 500;
         width: 100%;
-        border-bottom: 0.1em solid $pureWhite;
-        margin-bottom: 1em;
+        border-bottom: 0.02em solid $pureWhite;
+        margin: 1em 0;
     }
 
     li{
@@ -92,31 +128,42 @@
 
     }
 
+    $h: 3.8em;
+
     img{
-        border-radius: 0.5em;
-        min-width: 2.8em;
-        min-height: 2.8em;
+        // border-radius: 0.5em;
+
+        
+
+        min-width: $h;
+        min-height: $h;
+
+        width: $h;
+        height: $h;
         margin-right: 0.5em;
     }
 
-    .durationWrap{
-        width: 100%;
+    .suggestion{
+        padding: 0.5em;
+        cursor: pointer;
+        transition: 0.2s ease-out;
+
+        &:hover{
+            background: $transparentWhite;
+        }
     }
 
-    .durationIcon{
-        width: 0.85em;
-        margin-right: 0.25em;
+    .thumbnail{
+        // width: $h;
+        height: $h;
     }
 
-    .nameDetails{
-        width: 100%;
-        // background: pink;
-    }
+    .titleWrap{
+        padding-right: 1em;
 
-    .popularity{
-        min-width: 4em;
-        background: yellow;
-        height: 2em;
+        // p{
+        //     color: $highlightColor;
+        // }
     }
 }
 
