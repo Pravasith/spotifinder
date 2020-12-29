@@ -12,22 +12,22 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react'
 const Search = (props: { showAside: 'showAside' | 'hide' }) => {
 
     const [ values, handler ] = useForm({})
+    
+    const isFirstRender = useRef(true)
+
+    const [ showDropDown, setShowDropDown ] = useState(false)
     const [ height, setHeight ] = useState<string>(`8em`)
 
-    const [ showDropDown, setShowDropDown ] = useState(true)
+    const renders = useRef(0)
+    
 
-    useEffect(() => {
-        // Calculates height of suggestionsWrap element
-        const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
-        const h = (window.innerHeight - offsetTopRelativeToViewport) + 'px'
-        setHeight(h)
-    }, [])
+
 
     // useEffect(() => {
     //     console.log(values.search)
     // }, [values.search])
 
-    const wrap = useRef() as MutableRefObject<HTMLDivElement>
+    
 
     type DataType = 'artist' | 'album' | 'track'
 
@@ -87,23 +87,47 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
     )
 
 
-    const DropDownMenu = () => (
-        <div 
-            className={ `${styles.suggestionsWrap} ${utilStyles.posAbs_NW}` }
-            ref={wrap}
-            style={{
-                height: height
-            }}
-            >
-            <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
-                <aside className={ `${styles[props.showAside]}` }></aside>
-                    {
-                        <Suggestions/>
-                    }
-                <aside className={ `${styles[props.showAside]}` }></aside>
+    const DropDownMenu = () => {
+
+        const wrap = useRef() as MutableRefObject<HTMLDivElement>
+
+
+        useEffect(() => {
+            // Calculates height of suggestionsWrap element
+            if(isFirstRender.current){
+                const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
+                const h = (window.innerHeight - offsetTopRelativeToViewport) + 'px'
+                setHeight(h)
+
+                // console.log(renders.current++, isFirstRender)
+                isFirstRender.current = false
+            }
+    
+        }, [])
+
+        
+    
+
+        return (
+            <div 
+                className={ `${styles.suggestionsWrap} ${utilStyles.posAbs_NW}` }
+                ref={wrap}
+                style={{
+                    height: height
+                }}
+                >
+                <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
+                    <aside className={ `${styles[props.showAside]}` }></aside>
+                        {
+                            <Suggestions/>
+                        }
+                    <aside className={ `${styles[props.showAside]}` }></aside>
+                </div>
             </div>
-        </div>
-    )
+    
+        )
+    }
+        
 
     return (
         <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
