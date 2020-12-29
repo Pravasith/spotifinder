@@ -11,16 +11,23 @@
     // height: 50vh;
 
     .searchWrap{
-        padding-top: 20vh;
+        padding: 20vh 10vh;
         width: 100%;
         height: fit-content;
 
         z-index: 1;
+
+
+        
+        &:focus{
+            width: 100%;
+        }
     }
 
 
     .vinyl{
-        width: 30%;
+        width: 25%;
+        filter: drop-shadow(0 0 1em $transparentBlue);
     }
 
     .vinylIcons{
@@ -28,6 +35,19 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        filter: drop-shadow(0 0 1em $transparentBlue);
+    }
+
+    .homeBackgroundWrap{
+        width: 100vw;
+        height: 100vh;
+        // background: yellow;
+    }
+
+    .homeText{
+        margin: 1em;
+        max-width: 20vw;
+        text-align: center;
     }
 
 }

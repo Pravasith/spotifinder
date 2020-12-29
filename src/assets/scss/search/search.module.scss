@@ -8,6 +8,11 @@
 
     .searchWrap{
         width: 100%;
+        outline: none;
+        background: none;
+
+        
+
     }
 
     .showAside{
@@ -62,6 +67,7 @@
 
         color: $secondaryHighlight;
 
+
     }
 
     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -77,12 +83,27 @@
         color: $pureWhite;
     }
 
+    @keyframes FadeIn {
+        0%{
+            opacity: 0;
+            transform: scaleY(0.1);
+        }
+
+        100%{
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    }
+
     .suggestionsWrap{
         width: 100%;
         @include blurredBackdrop;
         top: 100%;
         padding: 0 4em;
         overflow-y: auto;
+
+        // animation: FadeIn 0.1s ease-in;
+        transform-origin: 50% 0%;
         // height: 100vh;
     }
 
@@ -150,6 +171,7 @@
 
         &:hover{
             background: $transparentWhite;
+            filter: drop-shadow(0 0 1em $transparentBlue);
         }
     }
 
@@ -160,10 +182,21 @@
 
     .titleWrap{
         padding-right: 1em;
+        max-width: 10em;
 
-        // p{
-        //     color: $highlightColor;
-        // }
+        h3, p{
+            max-width: 100%;
+            overflow:hidden;
+            display:inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .artist{
+        img{
+            border-radius: 100em;
+        }
     }
 }
 

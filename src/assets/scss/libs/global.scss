@@ -18,6 +18,7 @@
 ::-webkit-scrollbar {
     width: 2vh;  /* Remove scrollbar space */
 	background: transparent;  /* Optional: just make scrollbar invisible */
+	background: $transparentWhite;
 }
 
 /* Optional: show position indicator in red */
@@ -136,6 +137,7 @@ p{
 	line-height: 1.35em;
 	font-weight: 300;
 	margin: 0;
+	color: $secondaryHighlight;
 
 	span{
 		// display: inline-block;
@@ -146,7 +148,10 @@ p{
 
 input{
 	font-size: 1.15em;
+
 }
+
+
 
 
 ::-moz-selection { /* Code for Firefox */

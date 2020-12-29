@@ -14,10 +14,12 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
     const [ values, handler ] = useForm({})
     const [ height, setHeight ] = useState<string>(`8em`)
 
+    const [ showDropDown, setShowDropDown ] = useState(true)
+
     useEffect(() => {
         // Calculates height of suggestionsWrap element
         const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
-        const h = (window.innerHeight -offsetTopRelativeToViewport) + 'px'
+        const h = (window.innerHeight - offsetTopRelativeToViewport) + 'px'
         setHeight(h)
     }, [])
 
@@ -27,35 +29,16 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
 
     const wrap = useRef() as MutableRefObject<HTMLDivElement>
 
-    const SuggestionListElements = () => {
+    type DataType = 'artist' | 'album' | 'track'
+
+    const SuggestionListElements = (dataType: DataType) => {
         const arr: number[] = [1, 2, 3, 4, 5]
 
         return arr.map((item, i) => (
-            // <li 
-            //     className={ `${utilStyles.flexRow_Centre}` }
-            //     key={`suggestion-${i}`}
-            //     >
-            //     <img 
-            //         src="https://lh3.googleusercontent.com/a-/AOh14Gh0uJ6w9eS22YnV9mBkq5ZnmniEnrPuuWf4R6p1Zg=s70-p-k-rw-no" 
-            //         alt=""
-            //     />
-
-            //     <div className={ `${styles.nameDetails} ${utilStyles.flexCol_W}` }>
-            //         <p>The Beatles</p>
-            //         <div className={ `${styles.durationWrap} ${utilStyles.flexRow_NW}` }>
-            //             <div className={ `${styles.durationIcon} ${utilStyles.flexCol_W}` }>
-            //                 <DurationIcon/>
-            //             </div>
-            //             <p>3:15</p>
-            //         </div>
-            //     </div>
-
-            //     <div className={ `${styles.popularity} ${utilStyles.flexRow_Centre}` }>
-
-            //     </div>
-            // </li>
-
-            <div className={ `${styles.suggestion} ${utilStyles.flexRow_W}` }>
+            <div 
+                className={ `${styles.suggestion} ${styles[dataType]} ${utilStyles.flexRow_W}` }
+                key={ `suggestion-${i}` }
+                >
                 <div className={ `${styles.thumbnail}` }>
                     <img 
                         src="https://lh3.googleusercontent.com/a-/AOh14Gh0uJ6w9eS22YnV9mBkq5ZnmniEnrPuuWf4R6p1Zg=s70-p-k-rw-no" 
@@ -64,44 +47,74 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                 </div>
 
                 <div className={ `${styles.titleWrap} ${utilStyles.flexCol_NW}` }>
-                    <h3>Yellow Submarine</h3>
-                    <p>The Beatles</p>
+                    <h3>Yellow Submarine Yellow Submarine Yellow Submarine</h3>
+                    {
+                        (dataType !== 'artist')
+                        ?
+                        <p>The Beatles</p>
+                        :
+                        null
+                    }
                 </div>
             </div>
         ))
     }
 
-    const Suggestions = () => {
-        return (
-            <div className={ `${styles.suggestionsContainer} ${utilStyles.flexCol_NW}` }>
-                <ul>
-                    <h2 className={ `${styles.suggestionLabel}` }>Songs</h2>
-                    <div className={ `${styles.gridder}` }>
-                        {  SuggestionListElements() }
-                    </div>
-                </ul>
+    const Suggestions = () => (
+        <div className={ `${styles.suggestionsContainer} ${utilStyles.flexCol_NW}` }>
+            <ul>
+                <h2 className={ `${styles.suggestionLabel}` }>Songs</h2>
+                <div className={ `${styles.gridder}` }>
+                    {  SuggestionListElements('track') }
+                </div>
+            </ul>
 
-                <ul>
-                    <h2 className={ `${styles.suggestionLabel}` }>Albums</h2>
-                    <div className={ `${styles.gridder}` }>
-                        {  SuggestionListElements() }
-                    </div>
-                </ul>
+            <ul>
+                <h2 className={ `${styles.suggestionLabel}` }>Artists</h2>
+                <div className={ `${styles.gridder}` }>
+                    {  SuggestionListElements('artist') }
+                </div>
+            </ul>
 
-                <ul>
-                    <h2 className={ `${styles.suggestionLabel}` }>Artists</h2>
-                    <div className={ `${styles.gridder}` }>
-                        {  SuggestionListElements() }
-                    </div>
-                </ul>
+            <ul>
+                <h2 className={ `${styles.suggestionLabel}` }>Albums</h2>
+                <div className={ `${styles.gridder}` }>
+                    {  SuggestionListElements('album') }
+                </div>
+            </ul>
 
+        </div>
+    )
+
+
+    const DropDownMenu = () => (
+        <div 
+            className={ `${styles.suggestionsWrap} ${utilStyles.posAbs_NW}` }
+            ref={wrap}
+            style={{
+                height: height
+            }}
+            >
+            <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
+                <aside className={ `${styles[props.showAside]}` }></aside>
+                    {
+                        <Suggestions/>
+                    }
+                <aside className={ `${styles[props.showAside]}` }></aside>
             </div>
-        )
-    }
+        </div>
+    )
 
     return (
         <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
-            <div className={ `${styles.searchWrap} ${utilStyles.posRel}` }>
+            <div 
+                className={ `${styles.searchWrap} ${utilStyles.posRel}` }
+                // onMouseEnter={() => setShowDropDown(true)}
+                // onMouseLeave={() => setShowDropDown(false)}
+                onFocus={() => setShowDropDown(true)}
+                onBlur={() => setShowDropDown(false)}
+                tabIndex={1}
+                >
                 <div className={ `${styles.searchInputWrap} ${utilStyles.flexRow_Centre}` }>
                     <aside className={ `${styles[props.showAside]}` }></aside>
 
@@ -122,23 +135,16 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                 </div>
 
                
+                {
+                    showDropDown
+                    ?
+                    <DropDownMenu/>
+                    :
+                    null
+                }
 
 
-                <div 
-                    className={ `${styles.suggestionsWrap} ${utilStyles.posAbs_NW}` }
-                    ref={wrap}
-                    style={{
-                        height: height
-                    }}
-                    >
-                    <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
-                        <aside className={ `${styles[props.showAside]}` }></aside>
-                            {
-                                <Suggestions/>
-                            }
-                        <aside className={ `${styles[props.showAside]}` }></aside>
-                    </div>
-                </div>
+               
             </div>
         </div>
     )
