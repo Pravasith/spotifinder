@@ -55,6 +55,11 @@
         @include blurredBackdrop;
     }
 
+    form{
+        width: 100%;
+        height: 100%;
+    }
+
     .searchInput{
         height: 100%;
         width: 100%;

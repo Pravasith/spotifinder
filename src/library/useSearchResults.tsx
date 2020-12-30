@@ -1,76 +1,42 @@
-export default 1
+// export default 1
 
+import { useEffect, useState } from "react"
+import { Album, Artist, Track } from "../interfaces/spotify"
 
-// import { useEffect, useLayoutEffect, useState } from "react"
-// import { Album, Artist, Track } from "../interfaces/spotify"
+interface Search {
+    tracks: Track[]
+    albums: Album[]
+    artists: Artist[]
+}
 
-// interface Search {
-//     tracks: Track[]
-//     albums: Album[]
-//     artists: Artist[]
-// }
+type searchQueryArgs = {
 
-// export const useSearchResults = (search: string) => {
+}
 
-//     interface MState {
-//         data : null | Search[]
-//         loading : boolean
-//     }
+export const useSearchResults = (searchQueryArgs: string) => {
 
-//     const [ mState, setMState ] = useState<MState>(
-//         {
-//             data : null,
-//             loading : true
-//         }
-//     )
+    interface IState {
+        data : null | Search[]
+        loading : boolean
+    }
 
-//     const url = `${ API_URL }?q=${ movie_searched }`
+    const [ state, setState ] = useState<IState>(
+        {
+            data : null,
+            loading : true
+        }
+    )
 
-//     // useEffect(() => {
-//     //     console.log(mState)
-//     // }, [mState])
+    useEffect(() => {
+        // const getData = async () => {
+        //     await
+        // }
 
+        // getData()
+    }, [searchQueryArgs])
 
-//     useEffect(() => {
-//         // Don't request data if user hasn't searched anything
-//         setMState({
-//             ...mState,
-//             loading : true
-//         })
+    return state
 
-//         if(movie_searched.length > 3){
-//             getDataFromAPI(url)
-//             .then(res => {
-    
-//                 // console.log(
-//                 //     {
-//                 //         data : res.movies,
-//                 //         loading : false
-//                 //     }
-//                 // )
-//                 setMState({
-//                     data : res.movies,
-//                     loading : false
-//                 })
-//             })
-//             .catch(e => console.error("Something wrong with useMovies Hook dude.", e))
-//         }
-
-//         // else{
-//         //     setMState({
-//         //         data: [],
-//         //         loading : false
-//         //     })
-//         // }
-       
-
-//     }, [url])
-
-    
-
-   
-
-//     return mState
-// }
+}
 
 

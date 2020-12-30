@@ -7,72 +7,56 @@ export interface Image {
     url: string
 }
 
-export interface Artist {
-    // Mandatory
-    name: string
-    id: string
-    images: Image[]
-    followers: {
-        href: null | string,
-        total: number
-    }
 
-    // Optional
-    genres?: string[]
-    href?: string
-    popularity?: number
-    type?: 'artist'
-    uri?: string
-    external_urls?: {
-        spotify: string
-    }
-}
 
 export interface Album {
-    // Mandatory
+   
+    // Required
     name: string
     id: string
     images: Image[]
-    artists: string[]
 
     // Optional
-    album_type?: string
-    available_markets?: string[]
-    external_urls?: {
-        spotify: string
-    }
-    href?: string
-    release_date?: string
-    release_date_precision?: string
-    total_tracks?: number
-    type?: 'album'
-    uri?: string
+    artistNames: string[]
+    uri: string
+    href: string
 }
 
 export interface Track {
-    // Mandatory
-    album: {
-        // Mandatory
-        name: string
-        id: string
-        images: Image[]
-
-        // Optional
-        uri?: string
-        href?: string
-    }
+    
+    // Required
     preview_url: string
     name: string
     id: string
-    artists: string[]
+    images: Image[]
+    artistNames: string[]
+
 
     // Optional
-    popularity?: number
-    type?: 'track'
-    available_markets?: string[]
-    duration_ms?: number
-    uri?: string
-    href?: string
+    popularity: number
+    type: string
+    available_markets: string[]
+    duration_ms: number
+    uri: string
+    href: string
+}
+
+
+export interface Artist {
+
+    // Required
+    id: string
+    name: string
+    followers: number
+    images: Image[]
+
+    // Optional
+    popularity: number
+    type: string
+    uri: string
+    href: string
+    genres: string[]
+    
 }
 
 
