@@ -20,7 +20,7 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
     const isFirstRender = useRef(true)
 
     const [ showDropDown, setShowDropDown ] = useState(false)
-    const [ height, setHeight ] = useState<string>(`8em`)
+    const [ height, setHeight ] = useState<string>(`0em`)
 
     const renders = useRef(0)
 
@@ -30,6 +30,8 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
     
 
     const [ getSearchResults, { loading, data } ] = useLazyQuery(SEARCH_SPOTIFY)
+    const wrap = useRef() as MutableRefObject<HTMLDivElement>
+
 
     useEffect(() => {
         !!searchQuery && getSearchResults({
@@ -37,6 +39,15 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                 query: searchQuery
             }
         })
+
+        if(!!searchQuery && isFirstRender.current) {
+            const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
+            const h = (window.innerHeight - offsetTopRelativeToViewport) + 'px'
+            setHeight(h)
+
+            // console.log(renders.current++, isFirstRender)
+            isFirstRender.current = false
+        }
     }, [searchQuery])
 
     // useEffect(() => {
@@ -64,7 +75,8 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                 key={ `suggestion-${i}` }
                 >
                 <div className={ `${styles.thumbnail}` }>
-                    <img 
+                    <img
+                        className={ `${styles.thumbImg}` }
                         src={ item.thumbnail }
                         alt=""
                     />
@@ -141,46 +153,24 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
     }
 
 
-    const DropDown = () => {
-
-        const wrap = useRef() as MutableRefObject<HTMLDivElement>
-
-
-        useEffect(() => {
-            // Calculates height of suggestionsWrap element
-            if(isFirstRender.current) {
-                const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
-                const h = (window.innerHeight - offsetTopRelativeToViewport) + 'px'
-                setHeight(h)
-
-                // console.log(renders.current++, isFirstRender)
-                isFirstRender.current = false
-            }
-
-        }, [])
-
-        
-    
-
-        return (
-            <div 
-                className={ `${styles.suggestionsWrap} ${utilStyles.posAbs_NW}` }
-                ref={wrap}
-                style={{
-                    height: height
-                }}
-                >
-                <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
-                    <aside className={ `${styles[props.showAside]}` }></aside>
-                        {
-                            <Suggestions/>
-                        }
-                    <aside className={ `${styles[props.showAside]}` }></aside>
-                </div>
+    const DropDown = () => (
+        <div 
+            className={ `${styles.suggestionsWrap} ${utilStyles.posAbs_NW}` }
+            ref={wrap}
+            style={{
+                height: height
+            }}
+            >
+            <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
+                <aside className={ `${styles[props.showAside]}` }></aside>
+                    {
+                        <Suggestions/>
+                    }
+                <aside className={ `${styles[props.showAside]}` }></aside>
             </div>
-    
-        )
-    }
+        </div>
+
+    )
         
 
     return (
@@ -200,7 +190,8 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                         <SearchIcon/>
                     </div>
 
-                    <form 
+                    <form
+                        className={ `${styles.formWrap} ${utilStyles.flexRow_Centre}` }
                         onSubmit={(e) => {
                             e.preventDefault()
                             setSearchQuery(values.search)
@@ -209,11 +200,22 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                         <input
                             className={ `${styles.searchInput}` }
                             placeholder="Search songs, albums, artists.."
-                            type="search"
+                            type="text"
                             autoComplete="off"
                             name="search"
                             onChange={handler}
                         />
+
+                        <button
+                            type="submit"
+                            className={ `${styles.submitButton}` }
+                            >
+                            <img
+                                src="https://folio-pics.s3.eu-west-2.amazonaws.com/stylight/submit-button.png" 
+                                alt="Submit"
+                                className={ `${styles.submitIcon}` }
+                            />
+                        </button>
                     </form>
                     
 

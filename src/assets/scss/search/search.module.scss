@@ -6,6 +6,75 @@
 .container{
     width: 100%;
 
+
+
+
+    
+
+    @keyframes animatedBackground {
+        from {
+        background-position: 0% 0;
+        }
+        to {
+        background-position: 100% 0;
+        }
+    }
+
+    .submitButton{
+        border: 0.2em solid $transparentWhite;
+        padding: 1.25em;
+        height: 100%;
+
+        @include blurredBackdrop;
+        // border-radius: 100em;
+        outline: none;
+
+
+
+        cursor: pointer;
+        /* border: none; */
+        transition: 0.2s;
+
+        background-image: url(https://folio-pics.s3.eu-west-2.amazonaws.com/layoutBackground-01.png);
+        background-position: -100% 0%;
+        background-size: 500%;
+        background-repeat: no-repeat;
+
+
+        &:hover{
+            background-image: url(https://folio-pics.s3.eu-west-2.amazonaws.com/layoutBackground-01.png);
+            background-size: 800%;
+            background-repeat: repeat-x;
+            animation: animatedBackground 8s linear infinite ;
+        }
+
+        &:focus{
+            border-color: #000000;
+        }
+
+
+        border: none;
+    }
+
+
+
+    .submitIcon{
+        width: 3.25em;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .searchWrap{
         width: 100%;
         outline: none;
@@ -46,6 +115,10 @@
     .searchInputWrap{
         width: 100%;
         height: 5em;
+    }
+
+    .formWrap{
+        
     }
 
     .searchIcon{
@@ -156,7 +229,7 @@
 
     $h: 3.8em;
 
-    img{
+    .thumbImg{
         // border-radius: 0.5em;
 
         
@@ -203,6 +276,8 @@
             border-radius: 100em;
         }
     }
+
+
 }
 
 
