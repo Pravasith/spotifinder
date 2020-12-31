@@ -3,7 +3,7 @@
 import styles from '../../assets/scss/search/search.module.scss'
 import utilStyles from '../../assets/scss/libs/utils.module.scss'
 
-import { DurationIcon, SearchIcon } from "../../assets/SVGs/commonSVGs"
+import { DurationIcon, ImagePlaceHolderSVG, SearchIcon } from "../../assets/SVGs/commonSVGs"
 
 import { useForm } from '../../library/useForm'
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
@@ -16,7 +16,6 @@ import { SEARCH_SPOTIFY } from '../../library/apolloTypes'
 const Search = (props: { showAside: 'showAside' | 'hide' }) => {
 
     const [ values, handler ] = useForm({})
-    
     const isFirstRender = useRef(true)
 
     const [ showDropDown, setShowDropDown ] = useState(false)
@@ -75,10 +74,15 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                 key={ `suggestion-${i}` }
                 >
                 <div className={ `${styles.thumbnail}` }>
-                    <img
+                    {/* <img
                         className={ `${styles.thumbImg}` }
                         src={ item.thumbnail }
                         alt=""
+                    /> */}
+
+                    <ImagePlaceHolderSVG
+                        cn={ `${styles.thumbImg}` }
+                        imgSrc={ item.thumbnail }
                     />
                 </div>
 
@@ -203,7 +207,7 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
                             type="text"
                             autoComplete="off"
                             name="search"
-                            onChange={handler}
+                            onChange={ handler }
                         />
 
                         <button

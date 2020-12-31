@@ -23,7 +23,7 @@
 
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-    background: $highlightColor;
+    background: $darkGray;
 }
 
 html,
@@ -108,8 +108,8 @@ h2{
 	
 	font-size: 1.5em;
 	line-height: 1.25em;
-	font-weight: 400;
-	color: $darkerGray;
+	font-weight: 350;
+	color: $secondaryHighlight;
 	margin: 0;
 
 	span{
@@ -157,12 +157,12 @@ input{
 
 ::-moz-selection { /* Code for Firefox */
 	color: $pureWhite;
-	background: $highlightColor;
+	background: $blue;
 }
 
 ::selection {
 	color: $pureWhite;
-	background: $highlightColor;
+	background: $blue;
 }
 
 

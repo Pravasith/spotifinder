@@ -1,8 +1,10 @@
+import Link from 'next/link'
+
 import styles from '../assets/scss/navbar.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
 
-import { Logo } from '../assets/SVGs/navbarSVGs'
-import Search from './UIComponents/search'
+import { Logo, ProfilePic, SearchNavbar } from '../assets/SVGs/navbarSVGs'
+
 
 const Navbar = () => {
 
@@ -12,12 +14,28 @@ const Navbar = () => {
 
             <nav className={ `${utilStyles.flexRow_Centre}` }>
                 <div className={ `${utilStyles.flexRow_Centre} ${styles.logo}` }>
-                    <Logo/>
+                    <Link href="/">
+                        <a
+                            className={ `${utilStyles.flexCol_Centre}` }
+                            >
+                            <Logo/>
+                        </a>
+                    </Link>
                 </div>
 
                 <div className={ `${utilStyles.flexRow_Centre} ${styles.ULs}` }>
-                    <button>
-                        Hello
+                    
+
+                    <button
+                        className={ `${styles.navIcons}` }
+                        >
+                        <SearchNavbar/>
+                    </button>
+
+                    <button
+                        className={ `${styles.navIcons}` }
+                        >
+                        <ProfilePic/>
                     </button>
 
                     {/* <Search showAside={'hide'}/> */}

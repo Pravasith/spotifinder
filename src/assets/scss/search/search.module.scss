@@ -249,13 +249,18 @@
 
         &:hover{
             background: $transparentWhite;
-            filter: drop-shadow(0 0 1em $transparentBlue);
+            
+
+            .thumbnail{
+                filter: drop-shadow(0 0 1em $pureWhite);
+            }
         }
     }
 
     .thumbnail{
         // width: $h;
         height: $h;
+        transition: 0.2s;
     }
 
     .titleWrap{
@@ -272,9 +277,17 @@
     }
 
     .artist{
-        img{
+
+        .thumbImg{
             border-radius: 100em;
+            overflow: hidden;
         }
+    }
+
+    .nakedBod{
+        width: 100%;
+        background: yellow;
+        height: 100%;
     }
 
 
