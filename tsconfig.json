@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/UIComponents/imageSlider"  ],
   "exclude": [
     "node_modules"
   ]

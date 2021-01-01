@@ -7,7 +7,7 @@ import { HomeVinylTrack, VinylIcons } from '../assets/SVGs/homeSVGs'
 
 
 
-import Search from './UIComponents/search/search'
+import Search from './UIComponents/search'
 
 
 

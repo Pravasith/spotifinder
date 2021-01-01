@@ -27,13 +27,13 @@ const Navbar = () => {
                     
 
                     <button
-                        className={ `${styles.navIcons}` }
+                        className={ `${utilStyles.roundSVGButton}` }
                         >
                         <SearchNavbar/>
                     </button>
 
                     <button
-                        className={ `${styles.navIcons}` }
+                        className={ `${utilStyles.roundSVGButton}` }
                         >
                         <ProfilePic/>
                     </button>

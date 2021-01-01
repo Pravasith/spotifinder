@@ -1,0 +1,141 @@
+@import './libs/vars';
+
+
+
+.container{
+
+    width: 100%;
+    
+    .imageSlideShowContainer{
+        width: 100%;
+        margin: 0.5em 0;
+        // background: yellow;
+    }
+
+    .slideShowHeader{
+        width: 100%;
+        justify-content: space-between;
+        // margin: 0.45em 0;
+        padding: 0 0.25em;
+
+    }
+
+
+    .outerSlideWrap{
+        width: 100%;
+        // height: 12em;
+        padding: 0.5em 0;
+        overflow-x: hidden;
+        // overflow-x: auto;
+
+    }
+
+    .actualSlideWrappers{
+        // min-width: fit-content;
+        min-width: 100%;
+
+        // overflow: auto;
+
+    }
+
+    .slideWrap{
+
+        $aspectRatioWidth: percentage(1/4);
+        // min-width: 33.33%;
+        min-width: $aspectRatioWidth;
+        padding-top: $aspectRatioWidth + percentage((1/4) / 3);
+
+        cursor: pointer;
+
+        transition: 0.2s ease-out;
+
+        &:hover{
+
+            transform: translateY(-0.25em);
+
+            .actualPic{
+                width: 120%;
+                height: 120%;
+                transform-origin: 50% 50%;
+            }
+
+            .slideBgd{
+                filter: drop-shadow(0 0 0.2em $blue);
+                background: $pureWhite;
+            }
+
+            p{
+                color: $navyBlue;
+            }
+
+
+        }
+        
+    }
+
+    .slideInnerWrap{
+        width: 100%;
+        height: 100%;
+        padding: 0.25em;
+        text-align: center;
+
+
+       
+    }
+
+    .slideBgd{
+        transition: 0.2s;
+        background: $navyBlue;
+        height: 100%;
+        border-radius: 1em;
+    }
+
+    .picWrap{
+        width: 100%;
+        padding-top: 100%;
+
+        overflow: hidden;
+        
+        border-radius: 1em;
+
+        // border: 0.1em solid red;
+        
+    }
+
+    .actualPic{
+        transition: 0.2s ease-out;
+        width: 100%;
+        height: 100%;
+        transform-origin: 50% 50%;
+        object-fit: cover;
+    }
+
+    .footer{
+        max-width: 100%;
+        height: 25%;
+        padding: 0.5em;
+        
+
+        p{
+            overflow: hidden;
+            color: $pureWhite;
+            height: 100%;
+            width: 100%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 0.25em;
+            font-weight: 300;
+            // max-width: 100%;
+            // max-height: 100%;
+        }
+        // background: red;
+    }
+
+    .heading2{
+        font-size: 1.5em;
+        font-weight: 500;
+        color: $pureWhite;
+
+    }
+
+}

@@ -29,39 +29,9 @@
         // background: pink;
     }
 
-    $iconsHeight: 3.5em;
+    
 
-    .navIcons{
-        outline: none;
-        border: 0.2em solid $transparentWhite;
-        border-radius: 100em;
-        background: none;
-        
-        padding: 0.1em;
 
-        max-width: $iconsHeight;
-        max-height: $iconsHeight;
-
-        min-width: $iconsHeight;
-        min-height: $iconsHeight;
-
-        margin-left: 0.5em;
-        // background: yellow;
-        cursor: pointer;
-
-        svg{
-            width: 100%;
-            height: 100%;
-        }
-
-        &:hover{
-            border-color: $pureWhite;
-        }
-
-        &:focus{
-            border-color: $highlightShade;
-        }
-    }
 }
 
 
