@@ -35,6 +35,25 @@
 
     .title{
         margin-top: 0.85em;
+        background: $highlightColor;
+        font-weight: 600;
+
+
+        @keyframes textShine {
+            to {
+              background-position: 200%;
+            }
+        }
+
+        background: linear-gradient(45deg, $secondaryHighlight 20%, $highlightShade 30%, $highlightColor 70%, $secondaryHighlight 80%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: textShine 7s ease-in-out infinite alternate;
+
+        filter: drop-shadow(0 0.1em 0.2em $transparentBlue);
     }
 
     .artists{
@@ -88,6 +107,7 @@
     .nakedBod{
         width: 100%;
         height: 100%;
+        justify-content: space-between;
 
         // background: yellow;
     }

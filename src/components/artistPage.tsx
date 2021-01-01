@@ -75,7 +75,10 @@ const ArtistPage = () => {
                     </div>
                 </div>
 
-                <div className={ `${styles.nakedBod} ${utilStyles.flexCol_NW}` }>
+                <div className={ `${styles.nakedBod} ${utilStyles.flexRow_Centre}` }>
+                    <div className={ `${styles.sliderWrap}` }>
+                        <ImageSlider/>
+                    </div>
                     <div className={ `${styles.sliderWrap}` }>
                         <ImageSlider/>
                     </div>
