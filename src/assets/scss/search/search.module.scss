@@ -9,6 +9,7 @@
 
 
 
+
     
 
     @keyframes animatedBackground {
@@ -173,7 +174,8 @@
         }
     }
 
-    .suggestionsWrap{
+
+    .dropDownContainer{
         width: 100%;
         @include blurredBackdrop;
         top: 100%;
@@ -183,6 +185,10 @@
         // animation: FadeIn 0.1s ease-in;
         transform-origin: 50% 0%;
         // height: 100vh;
+    }
+
+    .suggestionsWrap{
+        width: 100%;
     }
 
     
