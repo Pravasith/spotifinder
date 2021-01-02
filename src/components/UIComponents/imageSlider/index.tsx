@@ -1,6 +1,7 @@
 import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import styles from '../../../assets/scss/image_slider.module.scss'
 import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
+import { ImgData } from '../../../interfaces/imageSlider'
 
 
 
@@ -13,38 +14,54 @@ const deleteThis = 'https://www.filmibeat.com/ph-big/2016/07/ileana-d-cruz-holid
 
 
 
-const Slides = () => {
 
-    const arr = [1, 2, 3, 4, 5, 6]
+const ImageSlider = (props: {
+        pictures: ImgData[]
+    }) => {
 
-    return arr.map((item, i) => {
-        return (
-            <div className={ `${styles.slideWrap} ${utilStyles.posRel}` }>
-                <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
-                    <div
-                        className={ `${styles.slideBgd}` }
-                        >
-                        <div className={ `${styles.picWrap} ${utilStyles.posRel}` }>
-                            <img
-                                className={ `${styles.actualPic} ${utilStyles.posAbs_NW}` }
-                                src={deleteThis3}
-                                alt=""
-                            />
+
+
+    const { pictures } = props
+
+
+    const Slides = () => {
+
+    
+        return pictures.map((item, i) => {
+            return (
+                <div 
+                    className={ `${styles.slideWrap} ${utilStyles.posRel}` }
+                    key={ 'imageSliderKey-' + i }
+                    >
+                    <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
+                        <div
+                            className={ `${styles.slideBgd}` }
+                            >
+                            <div className={ `${styles.picWrap} ${utilStyles.posRel}` }>
+                                <img
+                                    className={ `${styles.actualPic} ${utilStyles.posAbs_NW}` }
+                                    src={ item.url }
+                                    alt=""
+                                />
+                            </div>
+    
+                            <div className={ `${styles.footer} ${utilStyles.flexRow_Centre}` }>
+                                <p>{ item.title }</p>
+                            </div>
                         </div>
-
-                        <div className={ `${styles.footer} ${utilStyles.flexRow_Centre}` }>
-                            <p>Name of the song asd asdasd as asdasdasdasdsad asdasdasd</p>
-                        </div>
+                        
                     </div>
-                    
                 </div>
-            </div>
-        )
-    })
-}
+            )
+        })
+    }
 
 
-const ImageSlider = () => {
+
+
+
+
+
 
 
 

@@ -32,9 +32,9 @@ const ArtistPage = () => {
         ))
     }
 
-
-
-    const deleteThis2 = 'https://storage.googleapis.com/kaggle-avatars/images/2033655-gp.jpg'
+    const deleteThis5 = 'https://static.toiimg.com/thumb/msid-75690174,imgsize-134498,width-800,height-600,resizemode-75/75690174.jpg'
+    const deleteThis4 = 'https://s3.india.com/wp-content/uploads/2019/11/pjimage-7-7.jpg'
+    const deleteThis2 = 'https://i.pinimg.com/originals/ff/9a/15/ff9a155e6b28d5e280dbd48690032a91.jpg'
     const deleteThis3 = 'https://static.toiimg.com/photo/72106422.cms'
     const deleteThis = 'https://www.filmibeat.com/ph-big/2016/07/ileana-d-cruz-holidays-with-her-boyfriend-andrew-kneebone-fiji_1467630331150.jpg'
 
@@ -77,10 +77,46 @@ const ArtistPage = () => {
 
                 <div className={ `${styles.nakedBod} ${utilStyles.flexRow_Centre}` }>
                     <div className={ `${styles.sliderWrap}` }>
-                        <ImageSlider/>
+                        <ImageSlider
+                            pictures={
+                                [
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis4
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis5
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis3
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis2
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis3
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis
+                                    },
+                                ]
+                            }
+                        />
                     </div>
                     <div className={ `${styles.sliderWrap}` }>
-                        <ImageSlider/>
+                        {/* <ImageSlider
+                            numberOfSlides={5}
+                        /> */}
                     </div>
                 </div>
            </div>

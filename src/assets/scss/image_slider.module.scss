@@ -60,12 +60,13 @@
             }
 
             .slideBgd{
-                filter: drop-shadow(0 0 0.2em $blue);
+                filter: drop-shadow(0 0.3em 0.25em $blue);
                 background: $pureWhite;
             }
 
             p{
                 color: $darkerGray;
+                font-weight: 400;
             }
 
 
