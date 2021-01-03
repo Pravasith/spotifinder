@@ -80,7 +80,37 @@ const ArtistPage = () => {
                         <ImageSlider
                             pictures={
                                 [
+                                    // {
+                                    //     title: "Ileana D' Cruz",
+                                    //     url: deleteThis4
+                                    // },
+    
+                                    // {
+                                    //     title: "Ileana D' Cruz",
+                                    //     url: deleteThis5
+                                    // },
+    
                                     {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis3
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis2
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis3
+                                    },
+    
+                                    {
+                                        title: "Ileana D' Cruz",
+                                        url: deleteThis
+                                    },
+
+                                     {
                                         title: "Ileana D' Cruz",
                                         url: deleteThis4
                                     },
@@ -111,6 +141,7 @@ const ArtistPage = () => {
                                     },
                                 ]
                             }
+                            maxSlides={4}
                         />
                     </div>
                     <div className={ `${styles.sliderWrap}` }>

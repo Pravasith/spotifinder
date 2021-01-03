@@ -2,26 +2,109 @@ import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import styles from '../../../assets/scss/image_slider.module.scss'
 import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
 import { ImgData } from '../../../interfaces/imageSlider'
-
-
-
-
-const deleteThis2 = 'https://storage.googleapis.com/kaggle-avatars/images/2033655-gp.jpg'
-const deleteThis3 = 'https://static.toiimg.com/photo/72106422.cms'
-const deleteThis = 'https://www.filmibeat.com/ph-big/2016/07/ileana-d-cruz-holidays-with-her-boyfriend-andrew-kneebone-fiji_1467630331150.jpg'
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
 
 
 
 
 
 
-const ImageSlider = (props: {
-        pictures: ImgData[]
+const ImageSlider = memo((props: {
+        pictures: ImgData[],
+        maxSlides: number
     }) => {
 
+    const [ slideWidthAndHeight, setSlideWidthAndHeight ] = useState({})
+
+    const slidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
+    const actualSlidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
+
+    const currentSlideIteration = useRef(0)
+    
+
+    useLayoutEffect(() => {
+
+        const wrapperWidth = slidesWrapper.current.offsetWidth
+        const minSlideWidth = 100 / props.maxSlides
+
+        setSlideWidthAndHeight({
+            minWidth: (minSlideWidth / 100) * wrapperWidth,
+            paddingTop: ((minSlideWidth + (minSlideWidth / 3)) / 100) * wrapperWidth
+        })
+
+    }, [])
 
 
     const { pictures } = props
+   
+
+
+    const slide = ( direction: 'left' | 'right' ) => {
+
+        const wrapperWidth = slidesWrapper.current.offsetWidth
+        const individualSlideWidth = wrapperWidth / props.maxSlides
+
+        const noOfSets = Math.floor(props.pictures.length / props.maxSlides)
+        const remainingElementsInTheLastSet = props.pictures.length % props.maxSlides
+
+
+
+        switch (direction) {
+            case 'right':
+                if(currentSlideIteration.current < noOfSets){
+
+                    if(currentSlideIteration.current === (noOfSets - 1)){
+                        gsap.to(
+                            `.${ styles.actualSlideWrappers }`,
+                            {
+                                duration: 0.2,
+                                x: -(
+                                    (currentSlideIteration.current * wrapperWidth)
+                                        +
+                                    ( individualSlideWidth * remainingElementsInTheLastSet )
+                                )
+                            }
+                        )
+
+                        currentSlideIteration.current++
+                        break
+                    }
+
+                    currentSlideIteration.current++
+                    gsap.to(
+                        `.${ styles.actualSlideWrappers }`,
+                        {
+                            duration: 0.2,
+                            x: -(currentSlideIteration.current * wrapperWidth)
+                        }
+                    )
+                }
+
+                break
+
+            case 'left':
+                if(currentSlideIteration.current > 0){
+                    currentSlideIteration.current--
+
+                    gsap.to(
+                        `.${ styles.actualSlideWrappers }`,
+                        {
+                            duration: 0.2,
+                            x: -(currentSlideIteration.current * wrapperWidth)
+                        }
+                    )
+                }
+
+
+                break
+        
+            default:
+                break
+        }
+
+
+    }
 
 
     const Slides = () => {
@@ -32,6 +115,7 @@ const ImageSlider = (props: {
                 <div 
                     className={ `${styles.slideWrap} ${utilStyles.posRel}` }
                     key={ 'imageSliderKey-' + i }
+                    style={slideWidthAndHeight}
                     >
                     <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
                         <div
@@ -76,26 +160,34 @@ const ImageSlider = (props: {
                     <div className={ `${styles.leftRight} ${utilStyles.flexRow_Centre}` }>
                         <button
                             className={ `${styles.leftIcon} ${utilStyles.roundSVGButton}` }
+                            onClick={() => {slide('left')}}
                             >
                             <LeftArrow/>
                         </button>
 
                         <button
                             className={ `${styles.rightIcon} ${utilStyles.roundSVGButton}` }
+                            onClick={() => {slide('right')}}
                             >
                             <RightArrow/>
                         </button>
                     </div>
                 </div>
 
-                <div className={ `${styles.outerSlideWrap}` }>
-                    <div className={ `${styles.actualSlideWrappers} ${utilStyles.flexRow_NW}` }>
+                <div 
+                    className={ `${styles.outerSlideWrap}` }
+                    ref={ slidesWrapper }
+                    >
+                    <div 
+                        className={ `${styles.actualSlideWrappers} ${utilStyles.flexRow_NW}` }
+                        id={ 'actualSlidesWrapper' }
+                        >
                         { Slides() }
                     </div>
                 </div>
             </div>
         </div>
     )
-}
+})
 
 export default ImageSlider
