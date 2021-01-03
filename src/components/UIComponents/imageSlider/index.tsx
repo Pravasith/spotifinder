@@ -2,7 +2,7 @@ import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import styles from '../../../assets/scss/image_slider.module.scss'
 import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
 import { ImgData } from '../../../interfaces/imageSlider'
-import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
 
@@ -23,7 +23,7 @@ const ImageSlider = memo((props: {
     const currentSlideIteration = useRef(0)
     
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         const wrapperWidth = slidesWrapper.current.offsetWidth
         const minSlideWidth = 100 / props.maxSlides
