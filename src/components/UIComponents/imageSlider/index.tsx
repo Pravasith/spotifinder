@@ -48,6 +48,7 @@ const ImageSlider = memo((props: {
         id: string, // unique id
         title: string,
         pictures: ImgData[], // pictures array
+        maxSlides: number
     }) => {
 
     const [ slideWidthAndHeight, setSlideWidthAndHeight ] = useState({})
@@ -63,10 +64,27 @@ const ImageSlider = memo((props: {
 
 
 
+    useEffect(() => {
+        const { maxSlides } = props
+
+        const minWidth = ((1 / maxSlides) * 100) + '%'
+        const paddingTop = (((1 / maxSlides) * 100) + (((1 / maxSlides) / 3) * 100)) + '%'
+
+        // console.log({minWidth, paddingTop})
+
+        setSlideWidthAndHeight({
+            minWidth,
+            paddingTop
+        })
+    }, [])
 
 
 
-    const { pictures } = props
+
+    const { pictures, maxSlides } = props
+
+
+
    
 
 
@@ -74,17 +92,18 @@ const ImageSlider = memo((props: {
 
 
 
-        const individualSlide = document.getElementById('individualSlide')
+
+        const individualSlide = document.getElementById('individualSlide-' + props.id)
 
         const wrapperWidth = slidesWrapper.current.getBoundingClientRect().width
         const individualSlideWidth = (individualSlide as HTMLDivElement).getBoundingClientRect().width
-
-        const maxSlides = Math.floor(wrapperWidth / individualSlideWidth)
+    
+        // const maxSlides = Math.floor(wrapperWidth / individualSlideWidth)
         const noOfSets = Math.floor(props.pictures.length / maxSlides)
-
+    
         const remainingElementsInTheLastSet = props.pictures.length % maxSlides
-
-
+    
+    
         const sliderClassName = `.${props.id}-select`
 
 
@@ -97,6 +116,8 @@ const ImageSlider = memo((props: {
                     left: false,
                 })
 
+                
+
                 if(currentSlideIteration.current === (noOfSets - 1)){
                     gsap.to(
                         // `.${ styles.actualSlideWrappers }`,
@@ -104,7 +125,7 @@ const ImageSlider = memo((props: {
                         {
                             duration: 0.2,
                             x: -(
-                                (currentSlideIteration.current * wrapperWidth)
+                                ( currentSlideIteration.current * wrapperWidth )
                                     +
                                 ( individualSlideWidth * remainingElementsInTheLastSet )
                             )
@@ -117,6 +138,8 @@ const ImageSlider = memo((props: {
                         ...disabledButton,
                         right: true,
                     })
+
+                    console.log(currentSlideIteration.current)
                     break
                 }
 
@@ -184,7 +207,7 @@ const ImageSlider = memo((props: {
                     className={ `${styles.slideWrap} ${utilStyles.posRel}` }
                     key={ 'imageSliderKey-' + "-" + i }
                     style={ slideWidthAndHeight }
-                    id={ 'individualSlide' }
+                    id={ 'individualSlide-' + props.id }
                     >
                     <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
                         <div

@@ -49,10 +49,10 @@
     .slideWrap{
         // background: yellow;
 
-        $aspectRatioWidth: percentage(1/$noOfSlides);
-        // min-width: 33.33%;
-        min-width: $aspectRatioWidth;
-        padding-top: $aspectRatioWidth + percentage((1/$noOfSlides) / 3);
+        // $aspectRatioWidth: percentage(1/$noOfSlides);
+        // // min-width: 33.33%;
+        // min-width: $aspectRatioWidth;
+        // padding-top: $aspectRatioWidth + percentage((1/$noOfSlides) / 3);
 
         cursor: pointer;
 
