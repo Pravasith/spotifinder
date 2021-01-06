@@ -9,16 +9,22 @@
     .absBigWrap{
         width: 100%;
         height: 100vh;
-        padding: 0 5vw;
+        // padding: 0 5vw;
     }
 
     .header{
         width: 100%;
         height: 100%;
-        padding-top: 12vh;
+
+        
+
+        // padding: 0 5vw;
+        padding-left: 5vw;
+        
     }
 
     .coverPicture{
+        padding-top: 12vh;
         min-width: 15em;
         min-height: 15em;
 
@@ -31,6 +37,18 @@
         // background: pink;
     }
 
+
+    .rightSide{
+        padding: 12vh 5vw 0 2.5vw;
+        // padding-bottom: 0;
+
+        height: 100%;
+        min-width: 50%;
+        width: 100%;
+        background: $darkerGray;
+
+        overflow: auto;
+    }
 
     
 
@@ -105,12 +123,7 @@
         color: $pureWhite;
     }
 
-    .rightSide{
-        height: 100%;
-        min-width: 50%;
-        
-    }
-
+    
     .nakedBod{
         width: 100%;
         // max-height: 20%;

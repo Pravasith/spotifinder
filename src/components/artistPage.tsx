@@ -92,7 +92,6 @@ const ArtistPage = () => {
                                     pictures={pictureArray}
                                     maxSlides={5}
                                     title={'Popular songs'}
-                                    // width='500px'
                                 />
                             </div>
 
@@ -100,9 +99,8 @@ const ArtistPage = () => {
                                 <ImageSlider
                                     id={'slider-2'}
                                     pictures={pictureArray}
-                                    maxSlides={4}
+                                    maxSlides={3}
                                     title={'Popular Albums'}
-                                    // width='500px'
                                 />
                             </div>
                         </div>
