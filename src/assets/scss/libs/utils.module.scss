@@ -209,11 +209,13 @@
   margin-left: 0.5em;
   // background: yellow;
   cursor: pointer;
+  transition: 0.2s ease-out;
 
   svg{
       width: 100%;
       height: 100%;
   }
+  
 
   &:hover{
       border-color: $pureWhite;
@@ -221,6 +223,12 @@
 
   &:focus{
       border-color: $highlightShade;
+  }
+
+  &:disabled{
+	  opacity: 0.25;
+	  border-color: $transparentWhite;
+		cursor: default;
   }
 }
 

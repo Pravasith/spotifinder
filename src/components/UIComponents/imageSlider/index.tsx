@@ -12,13 +12,18 @@ import gsap from 'gsap'
 
 const ImageSlider = memo((props: {
         pictures: ImgData[],
-        maxSlides: number
+        maxSlides: number,
+        title: string
     }) => {
 
     const [ slideWidthAndHeight, setSlideWidthAndHeight ] = useState({})
 
     const slidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
     const actualSlidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
+    const [ disabledButton, setDisabledButton ] = useState({
+        left: true,
+        right: false
+    })
 
     const currentSlideIteration = useRef(0)
     
@@ -52,50 +57,71 @@ const ImageSlider = memo((props: {
 
         switch (direction) {
             case 'right':
-                if(currentSlideIteration.current < noOfSets){
 
-                    if(currentSlideIteration.current === (noOfSets - 1)){
-                        gsap.to(
-                            `.${ styles.actualSlideWrappers }`,
-                            {
-                                duration: 0.2,
-                                x: -(
-                                    (currentSlideIteration.current * wrapperWidth)
-                                        +
-                                    ( individualSlideWidth * remainingElementsInTheLastSet )
-                                )
-                            }
-                        )
+                setDisabledButton({
+                    ...disabledButton,
+                    left: false,
+                })
 
-                        currentSlideIteration.current++
-                        break
-                    }
-
-                    currentSlideIteration.current++
+                if(currentSlideIteration.current === (noOfSets - 1)){
                     gsap.to(
                         `.${ styles.actualSlideWrappers }`,
                         {
                             duration: 0.2,
-                            x: -(currentSlideIteration.current * wrapperWidth)
+                            x: -(
+                                (currentSlideIteration.current * wrapperWidth)
+                                    +
+                                ( individualSlideWidth * remainingElementsInTheLastSet )
+                            )
                         }
                     )
+
+                    currentSlideIteration.current++
+
+                    setDisabledButton({
+                        ...disabledButton,
+                        right: true,
+                    })
+                    break
                 }
+
+                currentSlideIteration.current++
+
+                gsap.to(
+                    `.${ styles.actualSlideWrappers }`,
+                    {
+                        duration: 0.2,
+                        x: -(currentSlideIteration.current * wrapperWidth)
+                    }
+                )
 
                 break
 
-            case 'left':
-                if(currentSlideIteration.current > 0){
-                    currentSlideIteration.current--
 
-                    gsap.to(
-                        `.${ styles.actualSlideWrappers }`,
-                        {
-                            duration: 0.2,
-                            x: -(currentSlideIteration.current * wrapperWidth)
-                        }
-                    )
+            case 'left':
+                if(currentSlideIteration.current <= 0){
+                    setDisabledButton({
+                        ...disabledButton,
+                        left: true,
+                    })
+
+                    break
                 }
 
+                setDisabledButton({
+                    ...disabledButton,
+                    right: false,
+                })
+
+                currentSlideIteration.current--
+
+                gsap.to(
+                    `.${ styles.actualSlideWrappers }`,
+                    {
+                        duration: 0.2,
+                        x: -(currentSlideIteration.current * wrapperWidth)
+                    }
+                )
 
                 break
         
@@ -155,12 +181,13 @@ const ImageSlider = memo((props: {
             >
             <div className={ `${styles.imageSlideShowContainer} ${utilStyles.flexCol_NW}` }>
                 <div className={ `${styles.slideShowHeader} ${utilStyles.flexRow_Centre}` }>
-                    <h2 className={ `${styles.heading2}` }>Popular Songs</h2>
+                    <h2 className={ `${styles.heading2}` }>{ props.title }</h2>
 
                     <div className={ `${styles.leftRight} ${utilStyles.flexRow_Centre}` }>
                         <button
                             className={ `${styles.leftIcon} ${utilStyles.roundSVGButton}` }
                             onClick={() => {slide('left')}}
+                            disabled={ disabledButton.left }
                             >
                             <LeftArrow/>
                         </button>
@@ -168,6 +195,7 @@ const ImageSlider = memo((props: {
                         <button
                             className={ `${styles.rightIcon} ${utilStyles.roundSVGButton}` }
                             onClick={() => {slide('right')}}
+                            disabled={ disabledButton.right }
                             >
                             <RightArrow/>
                         </button>

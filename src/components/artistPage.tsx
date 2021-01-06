@@ -1,6 +1,7 @@
 
 
 
+import { useEffect, useState } from 'react'
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
 import { CondorianoPP } from '../assets/SVGs/artistPageSVGs'
@@ -13,6 +14,13 @@ import ImageSlider from './UIComponents/imageSlider'
 
 const ArtistPage = () => {
 
+
+    const pictureArray = new Array(23).fill(null).map((item, i) => {
+        return {
+            url: 'https://picsum.photos/200/200?random=' + i,
+            title: 'Ileana my love'
+        }
+    })
 
     const similarArtists = () => {
 
@@ -78,70 +86,9 @@ const ArtistPage = () => {
                 <div className={ `${styles.nakedBod} ${utilStyles.flexRow_Centre}` }>
                     <div className={ `${styles.sliderWrap}` }>
                         <ImageSlider
-                            pictures={
-                                [
-                                    // {
-                                    //     title: "Ileana D' Cruz",
-                                    //     url: deleteThis4
-                                    // },
-    
-                                    // {
-                                    //     title: "Ileana D' Cruz",
-                                    //     url: deleteThis5
-                                    // },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis3
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis2
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis3
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis
-                                    },
-
-                                     {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis4
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis5
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis3
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis2
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis3
-                                    },
-    
-                                    {
-                                        title: "Ileana D' Cruz",
-                                        url: deleteThis
-                                    },
-                                ]
-                            }
+                            pictures={pictureArray}
                             maxSlides={4}
+                            title={'Popular songs'}
                         />
                     </div>
                     <div className={ `${styles.sliderWrap}` }>
