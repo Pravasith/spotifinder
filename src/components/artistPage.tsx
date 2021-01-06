@@ -15,6 +15,8 @@ import ImageSlider from './UIComponents/imageSlider'
 const ArtistPage = () => {
 
 
+
+
     const pictureArray = new Array(23).fill(null).map((item, i) => {
         return {
             url: 'https://picsum.photos/200/200?random=' + i,
@@ -33,7 +35,7 @@ const ArtistPage = () => {
                 >
                 <img 
                     className={ `${styles.artistPic}` }
-                    src={ deleteThis }
+                    src={ deleteThis3 }
                 />
                 <p className={ `${styles.artistName}` }>Artist x</p>
             </div>
@@ -51,13 +53,13 @@ const ArtistPage = () => {
     return (
         <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
            <div className={ `${styles.absBigWrap} ${utilStyles.flexCol_Centre} ${utilStyles.posAbs_NW}` }>
-                <div className={ `${styles.header} ${utilStyles.flexRow_W}` }>
+                <div className={ `${styles.header} ${utilStyles.flexRow_NW}` }>
                     <ImagePlaceHolderSVG
                         cn={ `${styles.coverPicture}` }
-                        imgSrc={deleteThis}
+                        imgSrc={deleteThis4}
                     />
 
-                    <div className={ `${styles.rightSide} ${utilStyles.flexCol_W}` }>
+                    <div className={ `${styles.rightSide} ${utilStyles.flexCol_NW}` }>
                         <h1 className={ `${styles.title}` }>The Beatles</h1>
                         <p className={ `${styles.genreNames}` }>Indie pop, rock</p>
 
@@ -79,24 +81,38 @@ const ArtistPage = () => {
                                     similarArtists()
                                 }
                             </div>
+
                         </div>
+                    
+                    
+                        <div className={ `${styles.nakedBod}` }>
+                            <div className={ `${styles.sliderWrap}` }>
+                                <ImageSlider
+                                    id={'slider-1'}
+                                    pictures={pictureArray}
+                                    // maxSlides={5}
+                                    title={'Popular songs'}
+                                    // width='500px'
+                                />
+                            </div>
+
+                            <div className={ `${styles.sliderWrap}` }>
+                                <ImageSlider
+                                    id={'slider-2'}
+                                    pictures={pictureArray}
+                                    // maxSlides={5}
+                                    title={'Popular Albums'}
+                                    // width='500px'
+                                />
+                            </div>
+                        </div>
+                    
+                    
+                    
                     </div>
                 </div>
 
-                <div className={ `${styles.nakedBod} ${utilStyles.flexRow_Centre}` }>
-                    <div className={ `${styles.sliderWrap}` }>
-                        <ImageSlider
-                            pictures={pictureArray}
-                            maxSlides={4}
-                            title={'Popular songs'}
-                        />
-                    </div>
-                    <div className={ `${styles.sliderWrap}` }>
-                        {/* <ImageSlider
-                            numberOfSlides={5}
-                        /> */}
-                    </div>
-                </div>
+                
            </div>
         </div>
     )

@@ -1,44 +1,69 @@
-import utilStyles from '../../../assets/scss/libs/utils.module.scss'
-import styles from '../../../assets/scss/image_slider.module.scss'
-import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
-import { ImgData } from '../../../interfaces/imageSlider'
+
+
+
+
+
+
+
+
+
+
+//      -----------------------------------------------------------------------------------------------------
+//      --  ---------------------------------------------------------------------------------------------  --
+//      --  --      IMPORTANT NOTE: CHANGE THE NUMBER OF SLIDES                                        --  --
+//      --  --      YOU WANT TO SEE PER SET IN THE SASS FILE.                                          --  --
+//      --  --      EDIT THE VARIABLE CALLED '$noOfSlides'                                             --  --
+//      --  ---------------------------------------------------------------------------------------------  --
+//      -----------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 import { memo, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
+import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
+// import { ImgData } from '../../../interfaces/imageSlider'
 
+import utilStyles from '../../../assets/scss/libs/utils.module.scss'
+import styles from '../../../assets/scss/image_slider.module.scss'
+
+
+
+
+
+interface ImgData {
+    title: string,
+    url: string
+}
 
 
 
 
 const ImageSlider = memo((props: {
-        pictures: ImgData[],
-        maxSlides: number,
-        title: string
+        id: string, // unique id
+        title: string,
+        pictures: ImgData[], // pictures array
     }) => {
 
     const [ slideWidthAndHeight, setSlideWidthAndHeight ] = useState({})
-
-    const slidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
-    const actualSlidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
     const [ disabledButton, setDisabledButton ] = useState({
         left: true,
         right: false
     })
 
-    const currentSlideIteration = useRef(0)
+    const slidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
+    // const actualSlidesWrapper = useRef() as React.MutableRefObject<HTMLDivElement>
     
+    const currentSlideIteration = useRef(0)
 
-    useEffect(() => {
 
-        const wrapperWidth = slidesWrapper.current.offsetWidth
-        const minSlideWidth = 100 / props.maxSlides
 
-        setSlideWidthAndHeight({
-            minWidth: (minSlideWidth / 100) * wrapperWidth,
-            paddingTop: ((minSlideWidth + (minSlideWidth / 3)) / 100) * wrapperWidth
-        })
 
-    }, [])
 
 
     const { pictures } = props
@@ -47,11 +72,20 @@ const ImageSlider = memo((props: {
 
     const slide = ( direction: 'left' | 'right' ) => {
 
-        const wrapperWidth = slidesWrapper.current.offsetWidth
-        const individualSlideWidth = wrapperWidth / props.maxSlides
 
-        const noOfSets = Math.floor(props.pictures.length / props.maxSlides)
-        const remainingElementsInTheLastSet = props.pictures.length % props.maxSlides
+
+        const individualSlide = document.getElementById('individualSlide')
+
+        const wrapperWidth = slidesWrapper.current.getBoundingClientRect().width
+        const individualSlideWidth = (individualSlide as HTMLDivElement).getBoundingClientRect().width
+
+        const maxSlides = Math.floor(wrapperWidth / individualSlideWidth)
+        const noOfSets = Math.floor(props.pictures.length / maxSlides)
+
+        const remainingElementsInTheLastSet = props.pictures.length % maxSlides
+
+
+        const sliderClassName = `.${props.id}-select`
 
 
 
@@ -65,7 +99,8 @@ const ImageSlider = memo((props: {
 
                 if(currentSlideIteration.current === (noOfSets - 1)){
                     gsap.to(
-                        `.${ styles.actualSlideWrappers }`,
+                        // `.${ styles.actualSlideWrappers }`,
+                        sliderClassName,
                         {
                             duration: 0.2,
                             x: -(
@@ -86,12 +121,18 @@ const ImageSlider = memo((props: {
                 }
 
                 currentSlideIteration.current++
+                // console.log(-(currentSlideIteration.current * wrapperWidth))
 
                 gsap.to(
-                    `.${ styles.actualSlideWrappers }`,
+                    // `.${ styles.actualSlideWrappers }`,
+                    sliderClassName,
                     {
                         duration: 0.2,
-                        x: -(currentSlideIteration.current * wrapperWidth)
+                        x: -(currentSlideIteration.current * wrapperWidth),
+                        // x: -(currentSlideIteration.current * (100 / noOfSets)) + '%', 
+
+
+                        // x: -( currentSlideIteration.current * (individualSlideWidth * props.maxSlides) )
                     }
                 )
 
@@ -116,7 +157,8 @@ const ImageSlider = memo((props: {
                 currentSlideIteration.current--
 
                 gsap.to(
-                    `.${ styles.actualSlideWrappers }`,
+                    // `.${ styles.actualSlideWrappers }`,
+                    sliderClassName,
                     {
                         duration: 0.2,
                         x: -(currentSlideIteration.current * wrapperWidth)
@@ -140,8 +182,9 @@ const ImageSlider = memo((props: {
             return (
                 <div 
                     className={ `${styles.slideWrap} ${utilStyles.posRel}` }
-                    key={ 'imageSliderKey-' + i }
-                    style={slideWidthAndHeight}
+                    key={ 'imageSliderKey-' + "-" + i }
+                    style={ slideWidthAndHeight }
+                    id={ 'individualSlide' }
                     >
                     <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
                         <div
@@ -178,6 +221,7 @@ const ImageSlider = memo((props: {
     return (
         <div
             className={ `${styles.container}` }
+            // style={ !!props.width ? { width: props.width } : {} }
             >
             <div className={ `${styles.imageSlideShowContainer} ${utilStyles.flexCol_NW}` }>
                 <div className={ `${styles.slideShowHeader} ${utilStyles.flexRow_Centre}` }>
@@ -205,10 +249,12 @@ const ImageSlider = memo((props: {
                 <div 
                     className={ `${styles.outerSlideWrap}` }
                     ref={ slidesWrapper }
+                    id={ 'slidesWrapper' }
                     >
                     <div 
-                        className={ `${styles.actualSlideWrappers} ${utilStyles.flexRow_NW}` }
-                        id={ 'actualSlidesWrapper' }
+                        className={ `${styles.actualSlideWrappers} ${props.id}-select ${utilStyles.flexRow_NW}` }
+                        // id={ 'actualSlidesWrapper' }
+                        // ref={ actualSlidesWrapper }
                         >
                         { Slides() }
                     </div>
