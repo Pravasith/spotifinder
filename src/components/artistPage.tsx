@@ -85,7 +85,7 @@ const ArtistPage = () => {
                     scrollTrigger: {
                         scroller: `.${styles.rightSide}`,
                         trigger: `.${styles.nakedBod}`,
-                        start: 'top center',
+                        start: 'top 25%',
                         // scrub: 0.5,
                         // markers: true,
                         toggleActions: 'restart none none reverse'
@@ -101,7 +101,7 @@ const ArtistPage = () => {
                     scrollTrigger: {
                         scroller: `.${styles.rightSide}`,
                         trigger: `.${styles.nakedBod}`,
-                        start: 'top center',
+                        start: 'top 25%',
                         // scrub: 0.5,
                         // markers: true,
                         toggleActions: 'restart none none reverse'
@@ -152,6 +152,7 @@ const ArtistPage = () => {
         ))
     }
 
+    const deleteX = 'https://www.watchplaystream.com/files/people/photos/78/783180.jpg'
     const deleteThis5 = 'https://static.toiimg.com/thumb/msid-75690174,imgsize-134498,width-800,height-600,resizemode-75/75690174.jpg'
     const deleteThis4 = 'https://s3.india.com/wp-content/uploads/2019/11/pjimage-7-7.jpg'
     const deleteThis2 = 'https://i.pinimg.com/originals/ff/9a/15/ff9a155e6b28d5e280dbd48690032a91.jpg'
@@ -168,7 +169,7 @@ const ArtistPage = () => {
                     <div className={ `${styles.leftSide} ${utilStyles.flexCol_NW}` }>
                         <ImagePlaceHolderSVG
                             cn={ `${styles.coverPicture}` }
-                            imgSrc={deleteThis4}
+                            imgSrc={deleteX}
                         />
 
                         <div className={ `${styles.simArts} ${utilStyles.flexCol_Centre}` }>
