@@ -24,3 +24,35 @@ export const CondorianoPP = () => (
       </g>
     </svg>
 )
+
+
+export const VerifiedIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    x="0"
+    y="0"
+    enableBackground="new 0 0 28 28"
+    version="1.1"
+    viewBox="0 0 28 28"
+    xmlSpace="preserve"
+  >
+    <circle
+      cx="14"
+      cy="14"
+      r="13.5"
+      fill="#39B54A"
+      stroke="#FFF"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit="10"
+    ></circle>
+    <path
+      fill="none"
+      stroke="#FFF"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit="10"
+      d="M7.6 15.8L11.2 19.4 20.4 10.2"
+    ></path>
+  </svg>
+)

@@ -1,9 +1,19 @@
 @import './libs/vars';
-
+@import "./libs/_mixins";
 
 .container{
     width: 100%;
     height: 100%;
+
+
+    p{
+        max-width: 100%;
+        overflow:hidden;
+        display:inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
 
 
     .absBigWrap{
@@ -18,42 +28,141 @@
 
         
 
+        
         // padding: 0 5vw;
-        padding-left: 5vw;
+       
         
     }
 
-    .coverPicture{
+    
+    
+
+    .leftSide{
         padding-top: 12vh;
-        min-width: 15em;
-        min-height: 15em;
+        height: 100%;
+        // background: pink;
+        padding-left: 5vw;
 
-        max-width: 15em;
-        max-height: 15em;
+        > * {
+            padding-right: 2.5vw;
+        }
+    }
 
-        margin-right: 2em;
+    .coverPicture{
+       
+        min-width: 17.5em;
+        min-height: 17.5em;
+
+        max-width: 17.5em;
+        max-height: 17.5em;
+
+        
         border-radius: 1em;
+
+        
 
         // background: pink;
     }
 
+    .simArts{
+        width: 100%;
+        opacity: 0;
+    }
+
+    $picDim: 3.5em;
+
+    
+
+    .simGrid{
+        margin-top: 0.25em;
+        // background: yellow;
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax($picDim + 0.5em, 1fr));
+        // grid-template-columns: 1fr 1fr 1fr;
+
+        justify-items: center;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .smallSimGrid{
+        margin-top: 2.75em;
+        width: 100%;
+    }
+
 
     .rightSide{
-        padding: 12vh 5vw 0 2.5vw;
+        
         // padding-bottom: 0;
 
         height: 100%;
         min-width: 50%;
         width: 100%;
-        background: $darkerGray;
+        // background: $darkestGray;
 
         overflow: auto;
+
+
+
+        > * {
+            padding-right: 5vw;
+            padding-left: 3vw;
+        }
     }
 
-    
+    .fixedStrip{
+
+        
+        transform: translateY(-100%); // For GSAP 
+
+        background: $darkestGray;
+        @include blurredBackdrop;
+
+        width: 100%;
+        padding-top: 2em;
+        padding-bottom: 1em;
+
+        position: fixed;
+        z-index: 1;
+
+        h2{
+            font-weight: 600;
+            font-size: 2em;
+            color: $highlightColor;
+        }
+    }
+
+    .topWrap{
+        padding-top: 12vh;
+        width: 100%;
+        
+        background: linear-gradient(0deg,  $darkerGray, $darkestGray, $darkestGray, $darkestGray);
+        // opacity: 0.15;
+    }
+
+    .nakedBod{
+        width: 100%;
+        background: $darkerGray;
+        
+        // max-height: 20%;
+        // justify-content: space-between;
+
+        // background: yellow;
+
+        // overflow: auto;
+    }
+
+
+    .verifiedIcon{
+        width: 1.2em;
+        margin-left: 0.5em;
+        margin-top: 0.2em;
+    }
 
     .title{
-        margin-top: 0.85em;
+        font-size: 4em;
+        margin-top: 0.2em;
         background: $highlightColor;
         font-weight: 600;
 
@@ -75,8 +184,17 @@
         filter: drop-shadow(0 0.1em 0.2em $transparentBlue);
     }
 
+    .similarArtists{
+        margin: 1em 0;
+        width: 100%;
+    }
+
     .artists{
         margin: 0.4em 0;
+    }
+
+    .rowArtists{
+        width: 100%;
     }
 
 
@@ -96,13 +214,13 @@
 
     .line{
         width: 3em;
-        height: 0.15em;
+        min-height: 0.15em;
         background: $highlightShade;
         margin: 0.5em 0.2em;
     }
 
 
-    $picDim: 3em;
+
 
 
     .artistPic{
@@ -114,7 +232,8 @@
     }
 
     .similarArtist{
-        margin-right: 1em;
+        // margin-right: 1em;
+        width: 100%;
     }
 
     
@@ -124,15 +243,6 @@
     }
 
     
-    .nakedBod{
-        width: 100%;
-        // max-height: 20%;
-        // justify-content: space-between;
-
-        // background: yellow;
-
-        // overflow: auto;
-    }
 
 
     .sliderWrap{
