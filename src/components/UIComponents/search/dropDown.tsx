@@ -107,10 +107,12 @@ const DropDown = memo((
 
         return (
             <div className={ `${styles.suggestionsContainer} ${utilStyles.flexCol_NW}` }>
+                
+
                 <ul>
-                    <h2 className={ `${styles.suggestionLabel}` }>Songs</h2>
+                    <h2 className={ `${styles.suggestionLabel}` }>Albums</h2>
                     <div className={ `${styles.gridder}` }>
-                        {  SuggestionListElements('track', tracks) }
+                        {  SuggestionListElements('album', albums) }
                     </div>
                 </ul>
 
@@ -122,12 +124,11 @@ const DropDown = memo((
                 </ul>
 
                 <ul>
-                    <h2 className={ `${styles.suggestionLabel}` }>Albums</h2>
+                    <h2 className={ `${styles.suggestionLabel}` }>Songs</h2>
                     <div className={ `${styles.gridder}` }>
-                        {  SuggestionListElements('album', albums) }
+                        {  SuggestionListElements('track', tracks) }
                     </div>
                 </ul>
-
             </div>
         )
     }
