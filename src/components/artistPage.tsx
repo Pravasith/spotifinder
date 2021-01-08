@@ -9,6 +9,9 @@ import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
 import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistPageSVGs'
 import { ImagePlaceHolderSVG, LeftArrow, RightArrow } from '../assets/SVGs/commonSVGs'
+import { ProfilePic } from '../assets/SVGs/navbarSVGs'
+import { IArtistData } from '../interfaces/pages'
+import { SongsInAlbum } from './UIComponents/albumData'
 import ImageSlider from './UIComponents/imageSlider'
 
 
@@ -32,11 +35,13 @@ const dynamicallyImportPackage = async () => {
     })
     .catch(e => console.log(e))
 
+    
     return allMods
 }
 
 
-const ArtistPage = () => {
+
+const ArtistPage = (props: IArtistData) => {
 
 
     useEffect(() => {
@@ -63,21 +68,21 @@ const ArtistPage = () => {
                 }
             )
 
-            gsap.to(
-                `.${styles.topWrap}`,
-                {
-                    scrollTrigger: {
-                        scroller: `.${styles.rightSide}`,
-                        trigger: `.${styles.nakedBod}`,
-                        start: 'top center',
-                        scrub: 0.5,
-                        // markers: true,
-                        toggleActions: 'restart none none reverse'
-                    },
-                    duration: 0.2,
-                    opacity: 0,
-                }
-            )
+            // gsap.to(
+            //     `.${styles.topWrap}`,
+            //     {
+            //         scrollTrigger: {
+            //             scroller: `.${styles.rightSide}`,
+            //             trigger: `.${styles.nakedBod}`,
+            //             start: 'top center',
+            //             scrub: 0.5,
+            //             // markers: true,
+            //             toggleActions: 'restart none none reverse'
+            //         },
+            //         duration: 0.2,
+            //         opacity: 0,
+            //     }
+            // )
 
             gsap.to(
                 `.${styles.simArts}`,
@@ -127,6 +132,10 @@ const ArtistPage = () => {
     }, [])
 
 
+    
+    let { getArtist, getRelatedArtists } = props.artistData
+    
+
     const pictureArray = new Array(23).fill(null).map((item, i) => {
         return {
             url: 'https://picsum.photos/200/200?random=' + i,
@@ -136,7 +145,7 @@ const ArtistPage = () => {
 
     const similarArtists = () => {
 
-        const arr = [1, 2, 3, 4, 5, 6]
+        const arr = [ ...getRelatedArtists ].splice(0, 6)
 
         return arr.map((item, i) => (
             <div 
@@ -145,9 +154,10 @@ const ArtistPage = () => {
                 >
                 <img 
                     className={ `${styles.artistPic}` }
-                    src={ deleteThis3 }
+                    src={ item.images[item.images.length - 1].url }
                 />
-                <p className={ `${styles.artistName}` }>Artist x</p>
+
+                <p className={ `${styles.artistName}` }>{ item.name }</p>
             </div>
         ))
     }
@@ -161,6 +171,8 @@ const ArtistPage = () => {
 
 
 
+
+
     return (
         <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
            <div className={ `${styles.absBigWrap} ${utilStyles.flexCol_Centre} ${utilStyles.posAbs_NW}` }>
@@ -169,7 +181,7 @@ const ArtistPage = () => {
                     <div className={ `${styles.leftSide} ${utilStyles.flexCol_NW}` }>
                         <ImagePlaceHolderSVG
                             cn={ `${styles.coverPicture}` }
-                            imgSrc={deleteX}
+                            imgSrc={ getArtist.images.length !== 0 ? getArtist.images[0].url : deleteX }
                         />
 
                         <div className={ `${styles.simArts} ${utilStyles.flexCol_Centre}` }>
@@ -189,7 +201,7 @@ const ArtistPage = () => {
                     <div className={ `${styles.rightSide} ${utilStyles.flexCol_NW}` }>
                         
                         <div className={ `${styles.fixedStrip} ${utilStyles.flexRow_NW}` }>
-                            <h2>The Beatles</h2>
+                            <h2>{ getArtist.name }</h2>
                         </div>
 
                         <div className={ `${styles.topWrap} ${utilStyles.flexCol_NW}` }>
@@ -202,8 +214,8 @@ const ArtistPage = () => {
                             </div>
 
 
-                            <h1 className={ `${styles.title}` }>The Beatles</h1>
-                            <p className={ `${styles.genreNames}` }>Indie pop, rock</p>
+                            <h1 className={ `${styles.title}` }>{ getArtist.name }</h1>
+                            <p className={ `${styles.genreNames}` }>{ getArtist.genres.join(', ') }</p>
 
                             <div className={ `${styles.artists} ${utilStyles.flexRow_NW}` }>
                                 <div className={ `${styles.condoriano} ${utilStyles.flexCol_W}` }>
@@ -231,23 +243,31 @@ const ArtistPage = () => {
 
 
                         <div className={ `${styles.nakedBod}` }>
+                            
                             <div className={ `${styles.sliderWrap}` }>
                                 <ImageSlider
-                                    id={'slider-1'}
-                                    pictures={pictureArray}
+                                    id={'top-tracks'}
+                                    pictures={ [
+                                        ...getArtist.popularTracks.map(track => {
+                                            const picObj = track.album.images[0]
+
+                                            return {
+                                                title: track.name,
+                                                url: picObj.url
+                                            }
+                                        })
+                                    ] }
                                     maxSlides={5}
                                     title={'Popular songs'}
                                 />
                             </div>
+                            
 
-                            <div className={ `${styles.sliderWrap}` }>
-                                <ImageSlider
-                                    id={'slider-2'}
-                                    pictures={pictureArray}
-                                    maxSlides={3}
-                                    title={'Popular Albums'}
-                                />
-                            </div>
+                            {
+                                SongsInAlbum(getArtist.albums)
+                            }
+
+                            
 
                             <div className={ `${styles.sliderWrap}` }>
                                 <ImageSlider

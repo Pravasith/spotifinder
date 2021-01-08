@@ -251,6 +251,68 @@
         margin-bottom: 0;
     }
 
+    .albumContainer{
+        width: 100%;
+        margin: 2em 0;
+        
+        * > {
+            width: 100%;
+        }
+    }
+
+    .albumHeader{
+        width: 100%;
+        // background: pink;
+        padding: 1em 0;
+        color: $pureWhite;
+    }
+
+    .albumImage{
+        width: 160px;
+        min-width: 160px;
+    }
+
+    .albumDetails{
+        padding: 2em;
+
+        p{
+            color: $pureWhite;
+        }
+    }
+
+    .albumName{
+        color: $pureWhite;
+        font-size: 3em;
+        font-weight: 600;
+    }
+
+    .songsList{
+        width: 100%;
+    }
+
+    .soloSong{
+        width: 100%;
+        justify-content: space-between;
+        padding: 0.3em 1em ;
+        border-top: 0.1em solid $pureWhite;
+        cursor: pointer;
+
+        // background: yellow;
+        transition: 0.2s;
+
+        &:hover{
+            background: $darkestGray;
+        }
+    }
+
+    .songName{
+        color: $pureWhite;
+    }
+
+    .duration{
+        padding: 0 1em;
+        color: $darkGray;
+    }
 }
 
 
