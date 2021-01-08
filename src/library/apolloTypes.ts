@@ -2,6 +2,7 @@ import { gql } from "@apollo/client"
 
 export const GENERIC_SPOTIFY = `
     name,
+    id,
     images{
         url, width
     }
@@ -49,12 +50,14 @@ export const GET_ARTIST = gql`
                 albumTracks{
                     name,
                     id,
+                    preview_url,
                     duration_ms
                 }
             },
             popularTracks{
                 name,
                 id,
+                preview_url,
                 album{
                     images{
                         url

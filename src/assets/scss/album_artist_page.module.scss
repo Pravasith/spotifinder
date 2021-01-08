@@ -12,6 +12,18 @@
         display:inline-block;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+    }
+
+    a{
+        text-overflow: ellipsis;
+        max-width: 100%;
+        white-space: nowrap;
+
+        &:hover{
+            text-decoration: underline;
+            color: $pureWhite;
+        }
     }
     
 
@@ -294,6 +306,7 @@
         width: 100%;
         justify-content: space-between;
         padding: 0.3em 1em ;
+        min-height: 3em;
         border-top: 0.1em solid $pureWhite;
         cursor: pointer;
 

@@ -19,12 +19,14 @@ export interface IArtistData {
                 albumTracks: {
                     name: string,
                     id: string,
-                    duration_ms: number
+                    duration_ms: number,
+                    preview_url: string
                 }[]
             }[],
             popularTracks: {
                 name: string,
                 id: string,
+                preview_url: string
                 album: {
                     images: {
                         url: string

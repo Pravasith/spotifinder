@@ -31,6 +31,7 @@ import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
 
 import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import styles from '../../../assets/scss/image_slider.module.scss'
+import titleCase from '../../../library/titleCase'
 
 
 
@@ -139,7 +140,7 @@ const ImageSlider = memo((props: {
                         right: true,
                     })
 
-                    console.log(currentSlideIteration.current)
+
                     break
                 }
 
@@ -222,7 +223,7 @@ const ImageSlider = memo((props: {
                             </div>
     
                             <div className={ `${styles.footer} ${utilStyles.flexRow_Centre}` }>
-                                <p>{ item.title }</p>
+                                <p>{ titleCase(item.title) }</p>
                             </div>
                         </div>
                         

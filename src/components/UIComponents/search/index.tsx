@@ -64,16 +64,26 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
 
 
     return (
-        <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
-            <div className={ `${styles.searchWrap} ${utilStyles.posRel}` }>
+        <div 
+            className={ `${styles.container} ${utilStyles.flexCol_Centre}` }
+            // onBlur={() => {
+            //     console.log('x')
+            //     setShowDropDown(false)
+            // }}
+            // tabIndex={1}
+            >
+            <div 
+                className={ `${styles.searchWrap} ${utilStyles.posRel}` }
+                onMouseEnter={() => setShowDropDown(true)}
+                    onMouseLeave={() => setShowDropDown(false)}
+                    // onFocus={() => setShowDropDown(true)}
+                    
+                    tabIndex={1}
+                >
 
                 <div
                     className={ `${styles.searchInputWrap} ${utilStyles.flexRow_Centre}` }
-                    // onMouseEnter={() => setShowDropDown(true)}
-                    // onMouseLeave={() => setShowDropDown(false)}
-                    onFocus={() => setShowDropDown(true)}
-                    onBlur={() => setShowDropDown(false)}
-                    tabIndex={1}
+                    
                     >
                     <aside className={ `${styles[props.showAside]}` }></aside>
 

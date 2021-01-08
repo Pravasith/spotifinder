@@ -2,15 +2,17 @@
 
 
 import gsap from 'gsap'
+import Link from 'next/link'
 
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
 import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistPageSVGs'
-import { ImagePlaceHolderSVG, LeftArrow, RightArrow } from '../assets/SVGs/commonSVGs'
+import { ImagePlaceHolderSVG } from '../assets/SVGs/commonSVGs'
 import { ProfilePic } from '../assets/SVGs/navbarSVGs'
 import { IArtistData } from '../interfaces/pages'
+import titleCase from '../library/titleCase'
 import { SongsInAlbum } from './UIComponents/albumData'
 import ImageSlider from './UIComponents/imageSlider'
 
@@ -132,33 +134,37 @@ const ArtistPage = (props: IArtistData) => {
     }, [])
 
 
+
     
     let { getArtist, getRelatedArtists } = props.artistData
     
 
-    const pictureArray = new Array(23).fill(null).map((item, i) => {
-        return {
-            url: 'https://picsum.photos/200/200?random=' + i,
-            title: 'Ileana my love'
-        }
-    })
+
 
     const similarArtists = () => {
 
         const arr = [ ...getRelatedArtists ].splice(0, 6)
 
         return arr.map((item, i) => (
-            <div 
-                className={ `${styles.similarArtist} ${utilStyles.flexCol_N}` }
+            <Link
+                href={ '/artist/' + item.id }
                 key={'similar-artist-' + i}
                 >
-                <img 
-                    className={ `${styles.artistPic}` }
-                    src={ item.images[item.images.length - 1].url }
-                />
+                <a>
+                   <div 
+                        className={ `${styles.similarArtist} ${utilStyles.flexCol_N}` }
+                        
+                        >
+                        <img 
+                            className={ `${styles.artistPic}` }
+                            src={ item.images[item.images.length - 1].url }
+                        />
 
-                <p className={ `${styles.artistName}` }>{ item.name }</p>
-            </div>
+                        <p className={ `${styles.artistName}` }>{ titleCase(item.name) }</p>
+                    </div> 
+                </a>
+                
+            </Link>
         ))
     }
 
@@ -170,6 +176,26 @@ const ArtistPage = (props: IArtistData) => {
     const deleteThis = 'https://www.filmibeat.com/ph-big/2016/07/ileana-d-cruz-holidays-with-her-boyfriend-andrew-kneebone-fiji_1467630331150.jpg'
 
 
+    function convertFollowers (labelValue: number) {
+
+        // Nine Zeroes for Billions
+        return Math.abs(Number(labelValue)) >= 1.0e+9
+    
+        ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
+        // Six Zeroes for Millions 
+        : Math.abs(Number(labelValue)) >= 1.0e+6
+    
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
+        // Three Zeroes for Thousands
+        : Math.abs(Number(labelValue)) >= 1.0e+3
+    
+        ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
+    
+        : Math.abs(Number(labelValue))
+    
+    }
+    
+    // alert(test(6800000)); // this outputs 6.8M
 
 
 
@@ -215,14 +241,14 @@ const ArtistPage = (props: IArtistData) => {
 
 
                             <h1 className={ `${styles.title}` }>{ getArtist.name }</h1>
-                            <p className={ `${styles.genreNames}` }>{ getArtist.genres.join(', ') }</p>
+                            <p className={ `${styles.genreNames}` }>{ titleCase(getArtist.genres.join(', ')) }</p>
 
                             <div className={ `${styles.artists} ${utilStyles.flexRow_NW}` }>
                                 <div className={ `${styles.condoriano} ${utilStyles.flexCol_W}` }>
                                     <CondorianoPP/>
                                 </div>
 
-                                <p className={ `${styles.artistNames}` }>2.5M</p>
+                                <p className={ `${styles.artistNames}` }>{ convertFollowers(getArtist.followers) }</p>
                             </div>
 
                             <span className={ `${styles.line}` }></span>
@@ -269,14 +295,14 @@ const ArtistPage = (props: IArtistData) => {
 
                             
 
-                            <div className={ `${styles.sliderWrap}` }>
+                            {/* <div className={ `${styles.sliderWrap}` }>
                                 <ImageSlider
                                     id={'slider-2'}
                                     pictures={pictureArray}
                                     maxSlides={4}
                                     title={'Popular Albums'}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     
                     

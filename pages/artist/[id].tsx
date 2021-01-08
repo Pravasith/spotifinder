@@ -54,7 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // console.log(paths)
 
     // fallback : false sets the pages with urls not mentioned in paths as 404 Not founds
-    return { paths, fallback: true }
+    return { paths, fallback: 'blocking' }
 }
 
 

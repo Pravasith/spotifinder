@@ -4,6 +4,8 @@ import { Album, Artist, Track } from "../../../interfaces/spotify"
 import styles from '../../../assets/scss/search/search.module.scss'
 import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import { ImagePlaceHolderSVG } from "../../../assets/SVGs/commonSVGs"
+import Link from "next/link"
+import titleCase from "../../../library/titleCase"
 
 
 
@@ -31,7 +33,8 @@ const DropDown = memo((
     type SortedData = {
         title: string,
         thumbnail: string,
-        sub_title?: string
+        sub_title?: string,
+        id: string
     }
 
     const { data, loading } = props
@@ -51,35 +54,53 @@ const DropDown = memo((
 
             const arr = [...sortedData]
 
+            const returnHref = (item: SortedData) => {
+                if(dataType === 'artist'){
+                    return '/artist/' + item.id
+                }
+
+                else if(dataType === 'album'){
+                    return '/album/' + item.id
+                }
+
+                else return '/album/' + item.id
+            }
+
             return arr.map((item, i) => (
-                <div 
-                    className={ `${styles.suggestion} ${styles[dataType]} ${utilStyles.flexRow_W}` }
+                <Link
+                    href={ returnHref(item) }
                     key={ `suggestion-${i}` }
                     >
-                    <div className={ `${styles.thumbnail}` }>
-                        {/* <img
-                            className={ `${styles.thumbImg}` }
-                            src={ item.thumbnail }
-                            alt=""
-                        /> */}
+                    <a>
+                        <div 
+                            className={ `${styles.suggestion} ${styles[dataType]} ${utilStyles.flexRow_W}` }
+                            >
+                            <div className={ `${styles.thumbnail}` }>
+                                {/* <img
+                                    className={ `${styles.thumbImg}` }
+                                    src={ item.thumbnail }
+                                    alt=""
+                                /> */}
 
-                        <ImagePlaceHolderSVG
-                            cn={ `${styles.thumbImg}` }
-                            imgSrc={ item.thumbnail }
-                        />
-                    </div>
+                                <ImagePlaceHolderSVG
+                                    cn={ `${styles.thumbImg}` }
+                                    imgSrc={ item.thumbnail }
+                                />
+                            </div>
 
-                    <div className={ `${styles.titleWrap} ${utilStyles.flexCol_NW}` }>
-                        <h3>{ item.title }</h3>
-                        {
-                            (dataType !== 'artist')
-                            ?
-                            <p>{ item.sub_title }</p>
-                            :
-                            null
-                        }
-                    </div>
-                </div>
+                            <div className={ `${styles.titleWrap} ${utilStyles.flexCol_NW}` }>
+                                <h3>{ item.title }</h3>
+                                {
+                                    (dataType !== 'artist')
+                                    ?
+                                    <p>{ item.sub_title }</p>
+                                    :
+                                    null
+                                }
+                            </div>
+                        </div>
+                    </a>
+                </Link>
             ))
         }
 
@@ -89,19 +110,22 @@ const DropDown = memo((
         const searchResult = data.search
 
         const tracks = searchResult.tracks.map((item: Track): SortedData => ({
-            title: item.name,
+            title: titleCase(item.name),
+            id: item.id,
             thumbnail: item.images.length > 0 ? item.images[item.images.length - 1].url : 'https://imgur.com/a/sAb1Vx7',
-            sub_title: item.artistNames.join(", ")
+            sub_title: titleCase(item.artistNames.join(", "))
         }))
 
         const albums = searchResult.albums.map((item: Album): SortedData => ({
-            title: item.name,
+            title: titleCase(item.name),
+            id: item.id,
             thumbnail: item.images.length > 0 ? item.images[item.images.length - 1].url : 'https://imgur.com/a/sAb1Vx7',
-            sub_title: item.artistNames.join(", ")
+            sub_title: titleCase(item.artistNames.join(", "))
         }))
 
         const artists = searchResult.artists.map((item: Artist): SortedData => ({
-            title: item.name,
+            title: titleCase(item.name),
+            id: item.id,
             thumbnail: item.images.length > 0 ? item.images[item.images.length - 1].url : 'https://imgur.com/a/sAb1Vx7',
         }))
 
