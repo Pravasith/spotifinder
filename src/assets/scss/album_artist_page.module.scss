@@ -212,6 +212,9 @@
 
 
     .genreNames, .artistNames{
+        a{
+            color: $pureWhite;
+        }
         color: $pureWhite;
     }
 
@@ -325,6 +328,36 @@
     .duration{
         padding: 0 1em;
         color: $darkGray;
+    }
+
+    .subData{
+        * > {
+            margin:0.5em 0;
+        }
+
+        p{
+            color: $lightGray;
+            margin:0.15em 0;
+        }
+
+        span{
+            color: $secondaryHighlight;
+        }
+    }
+
+    .secondaryData{
+        * > {
+            padding: 1em 0;
+        }
+    }
+
+    .dot{
+        min-width: 0.5em;
+        min-height: 0.5em;
+        background: $highlightColor;
+        border-radius: 100em;
+        margin: 0 1em;
+        margin-bottom: 0.5em;
     }
 }
 

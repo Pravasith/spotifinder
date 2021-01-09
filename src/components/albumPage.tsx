@@ -2,41 +2,24 @@
 
 
 import gsap from 'gsap'
+import Link from 'next/link'
 
 
 import { useEffect } from 'react'
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
-import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistPageSVGs'
+import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistAlbumPageSVGs'
 import { ImagePlaceHolderSVG } from '../assets/SVGs/commonSVGs'
+import { IAlbumData } from '../interfaces/pages'
+import { dynamicallyImportPackage } from '../library/dynamicImport'
+import { titleCase } from '../library/stringOps'
 import ImageSlider from './UIComponents/imageSlider'
 
 
-const dynamicallyImportPackage = async () => {
-    let allMods = {}
-
-    // Importing trackball controls and GLTFLoader
-    await Promise.all([
-
-        import('gsap/ScrollTrigger'),
-        // import('three/examples/jsm/loaders/DRACOLoader.js'),
-
-    ])
-    .then(modules => {
-        modules.map((item, i) => {
-            allMods = {
-                ...allMods,
-                ...item
-            }
-        })
-    })
-    .catch(e => console.log(e))
-
-    return allMods
-}
 
 
-const AlbumPage = () => {
+
+const AlbumPage = (props: IAlbumData) => {
 
 
     useEffect(() => {
@@ -127,6 +110,8 @@ const AlbumPage = () => {
     }, [])
 
 
+    const { getAlbum } = props.albumData
+
     const pictureArray = new Array(23).fill(null).map((item, i) => {
         return {
             url: 'https://picsum.photos/200/200?random=' + i,
@@ -134,23 +119,7 @@ const AlbumPage = () => {
         }
     })
 
-    const similarArtists = () => {
 
-        const arr = [1, 2, 3, 4, 5, 6]
-
-        return arr.map((item, i) => (
-            <div 
-                className={ `${styles.similarArtist} ${utilStyles.flexCol_N}` }
-                key={'similar-artist-' + i}
-                >
-                <img 
-                    className={ `${styles.artistPic}` }
-                    src={ deleteThis3 }
-                />
-                <p className={ `${styles.artistName}` }>Artist x</p>
-            </div>
-        ))
-    }
 
     const deleteX = 'https://tvline.com/wp-content/uploads/2020/01/one-piece-live-action.jpg'
     
@@ -167,31 +136,19 @@ const AlbumPage = () => {
                         <ImagePlaceHolderSVG
                             cn={ `${styles.coverPicture}` }
                             imgSrc={deleteX}
-                        />
-
-                        <div className={ `${styles.simArts} ${utilStyles.flexCol_Centre}` }>
-                            <h2>Similar Artists</h2>
-                            <span className={ `${styles.line}` }></span>
-
-                            <div className={ `${styles.simGrid} ${styles.smallSimGrid}` }>
-                                {
-                                    similarArtists()
-                                }
-                            </div>
-                        </div>
-                        
+                        />                        
                     </div>
 
 
                     <div className={ `${styles.rightSide} ${utilStyles.flexCol_NW}` }>
                         
                         <div className={ `${styles.fixedStrip} ${utilStyles.flexRow_NW}` }>
-                            <h2>The Beatles</h2>
+                            <h2>{ titleCase(getAlbum.name) }</h2>
                         </div>
 
                         <div className={ `${styles.topWrap} ${utilStyles.flexCol_NW}` }>
                             <div className={ `${styles.verified} ${utilStyles.flexRow_W}` }>
-                                <p>ARTIST</p>
+                                <p>{ getAlbum.album_type.toUpperCase() }</p>
 
                                 <div className={ `${styles.verifiedIcon}` }>
                                     <VerifiedIcon/>
@@ -199,29 +156,46 @@ const AlbumPage = () => {
                             </div>
 
 
-                            <h1 className={ `${styles.title}` }>The Beatles</h1>
-                            <p className={ `${styles.genreNames}` }>Indie pop, rock</p>
+                            <h1 className={ `${styles.title}` }>{ titleCase(getAlbum.name) }</h1>
+                            
+
+                            <div className={ `${styles.subData} ${utilStyles.flexCol_NW}` }>
+                                <p className={ `${styles.genreNames}` }>{ titleCase(getAlbum.copyrights) }</p>
+
+                                
+
+                                <div className={ `${styles.secondaryData} ${utilStyles.flexRow_Centre}` }>
+                                    <p><span>Released in </span>{ " " + getAlbum.release_date }</p>
+                                    <div className={ `${styles.dot}` }></div>
+                                    <p>{ getAlbum.albumTracks.length + " " }<span>Tracks</span></p>
+                                </div>
+                                
+                            </div>
+
 
                             <div className={ `${styles.artists} ${utilStyles.flexRow_NW}` }>
                                 <div className={ `${styles.condoriano} ${utilStyles.flexCol_W}` }>
                                     <CondorianoPP/>
                                 </div>
 
-                                <p className={ `${styles.artistNames}` }>2.5M</p>
+                                <p className={ `${styles.artistNames} ${utilStyles.flexRow_NW}` }>
+                                    {
+                                        getAlbum.artists.map(artist => (
+                                            <Link 
+                                                href={ `/artist/${artist.id}` }
+                                                key={ "artist-" +  artist.id }
+                                                >
+                                                <a>
+                                                    { artist.name }<br/>
+                                                </a>
+                                            </Link>
+                                        ))
+                                    }
+                                </p>
                             </div>
 
                             <span className={ `${styles.line}` }></span>
 
-                            <div className={ `${styles.similarArtists} ${utilStyles.flexCol_NW}` }>
-                                <h2 className={ `${styles.artists}` }>Similar Artists</h2>
-
-                                <div className={ `${styles.simGrid}` }>
-                                    {
-                                        similarArtists()
-                                    }
-                                </div>
-
-                            </div>
 
                         </div>
 

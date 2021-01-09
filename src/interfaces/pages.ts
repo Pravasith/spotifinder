@@ -46,3 +46,37 @@ export interface IArtistData {
     
     }
 }
+
+
+export interface IAlbumData {
+    albumData : {
+        getAlbum: {
+            name: string,
+            album_type: string,
+            copyrights: string,
+            release_date: string,
+            albumTracks: {
+                name: string,
+                preview_url: string,
+                id: string,
+            }[]
+            artists: {
+                name: string,
+                id: string,
+                albums: {
+                    name: string,
+                    id: string,
+                    album_type: string,
+                    images: {
+                        url: string
+                    }[],
+                    albumTracks: {
+                        name: string,
+                        id: string,
+                        preview_url: string
+                    }[]
+                }
+            }[]
+        }
+    }
+}

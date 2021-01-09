@@ -31,7 +31,7 @@ import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
 
 import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import styles from '../../../assets/scss/image_slider.module.scss'
-import titleCase from '../../../library/titleCase'
+import { titleCase } from '../../../library/stringOps'
 
 
 

@@ -44,6 +44,7 @@ export const GET_ARTIST = gql`
             albums{
                 name,
                 id,
+                album_type,
                 images{
                     url
                 },
@@ -79,4 +80,37 @@ export const GET_ARTIST = gql`
 `
 
 
+
+export const GET_ALBUM = gql`
+    query ($albumId: String!)  {
+        getAlbum(albumId: $albumId){
+            name,
+            album_type,
+            copyrights,
+            release_date,
+            albumTracks{
+                name,
+                preview_url,
+                id,
+            }
+            artists{
+                name,
+                id,
+                albums{
+                    name,
+                    id,
+                    album_type,
+                    images{
+                        url
+                    },
+                    albumTracks{
+                        name,
+                        id,
+                        preview_url
+                    }
+                }
+            }
+        }
+    }
+`
   

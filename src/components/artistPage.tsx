@@ -8,38 +8,14 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
-import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistPageSVGs'
+import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistAlbumPageSVGs'
 import { ImagePlaceHolderSVG } from '../assets/SVGs/commonSVGs'
-import { ProfilePic } from '../assets/SVGs/navbarSVGs'
+
 import { IArtistData } from '../interfaces/pages'
-import titleCase from '../library/titleCase'
+import { dynamicallyImportPackage } from '../library/dynamicImport'
+import { titleCase } from '../library/stringOps'
 import { SongsInAlbum } from './UIComponents/albumData'
 import ImageSlider from './UIComponents/imageSlider'
-
-
-const dynamicallyImportPackage = async () => {
-    let allMods = {}
-
-    // Importing trackball controls and GLTFLoader
-    await Promise.all([
-
-        import('gsap/ScrollTrigger'),
-        // import('three/examples/jsm/loaders/DRACOLoader.js'),
-
-    ])
-    .then(modules => {
-        modules.map((item, i) => {
-            allMods = {
-                ...allMods,
-                ...item
-            }
-        })
-    })
-    .catch(e => console.log(e))
-
-    
-    return allMods
-}
 
 
 

@@ -7,9 +7,9 @@ import { ImagePlaceHolderSVG } from "../../assets/SVGs/commonSVGs"
 
 import styles from '../../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../../assets/scss/libs/utils.module.scss'
-import titleCase from "../../library/titleCase"
+import { titleCase } from "../../library/stringOps"
 
-import { PauseButton, PlayButton, StopButton } from "../../assets/SVGs/artistPageSVGs"
+import { PauseButton, PlayButton, StopButton } from "../../assets/SVGs/artistAlbumPageSVGs"
 
 type SongDataType = {
     name: string,
@@ -21,6 +21,7 @@ type SongDataType = {
 type AlbumDataType = {
     name: string,
     id: string,
+    album_type?: string,
     images: {
         url: string
     }[],
@@ -166,7 +167,7 @@ export const SongsInAlbum = (albumData: AlbumDataType[]) => {
                 />
 
                 <div className={ `${styles.albumDetails} ${utilStyles.flexCol_NW}` }>
-                    <p>ALBUM</p>
+                    <p>{ item.album_type?.toUpperCase() }</p>
                     <h2 className={ `${styles.albumName}` }>{ titleCase(item.name) }</h2>
                     <p>{ item.albumTracks.length } songs</p>
                 </div>

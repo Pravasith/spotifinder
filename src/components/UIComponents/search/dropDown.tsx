@@ -5,7 +5,7 @@ import styles from '../../../assets/scss/search/search.module.scss'
 import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import { ImagePlaceHolderSVG } from "../../../assets/SVGs/commonSVGs"
 import Link from "next/link"
-import titleCase from "../../../library/titleCase"
+import { titleCase } from "../../../library/stringOps"
 
 
 
