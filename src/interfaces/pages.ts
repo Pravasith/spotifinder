@@ -26,7 +26,8 @@ export interface IArtistData {
             popularTracks: {
                 name: string,
                 id: string,
-                preview_url: string
+                preview_url: string,
+                duration_ms: number,
                 album: {
                     images: {
                         url: string

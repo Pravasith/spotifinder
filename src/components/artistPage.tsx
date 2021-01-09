@@ -168,14 +168,8 @@ const ArtistPage = (props: IArtistData) => {
         ))
     }
 
-    const deleteX = 'https://www.watchplaystream.com/files/people/photos/78/783180.jpg'
-    const deleteThis5 = 'https://static.toiimg.com/thumb/msid-75690174,imgsize-134498,width-800,height-600,resizemode-75/75690174.jpg'
-    const deleteThis4 = 'https://s3.india.com/wp-content/uploads/2019/11/pjimage-7-7.jpg'
-    const deleteThis2 = 'https://i.pinimg.com/originals/ff/9a/15/ff9a155e6b28d5e280dbd48690032a91.jpg'
-    const deleteThis3 = 'https://static.toiimg.com/photo/72106422.cms'
-    const deleteThis = 'https://www.filmibeat.com/ph-big/2016/07/ileana-d-cruz-holidays-with-her-boyfriend-andrew-kneebone-fiji_1467630331150.jpg'
-
-
+    const deleteX = 'https://picsum.photos/200/200'
+ 
     function convertFollowers (labelValue: number) {
 
         // Nine Zeroes for Billions
@@ -197,7 +191,14 @@ const ArtistPage = (props: IArtistData) => {
     
     // alert(test(6800000)); // this outputs 6.8M
 
-
+    const albumPictures = () => {
+        return getArtist.albums.map(album => {
+            return {
+                title: album.name,
+                url: album.images[0].url
+            }
+        })
+    }
 
     return (
         <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
@@ -272,23 +273,34 @@ const ArtistPage = (props: IArtistData) => {
                             
                             <div className={ `${styles.sliderWrap}` }>
                                 <ImageSlider
-                                    id={'top-tracks'}
-                                    pictures={ [
-                                        ...getArtist.popularTracks.map(track => {
-                                            const picObj = track.album.images[0]
-
-                                            return {
-                                                title: track.name,
-                                                url: picObj.url
-                                            }
-                                        })
-                                    ] }
-                                    maxSlides={5}
-                                    title={'Popular songs'}
+                                    id={'AllAlbumsX'}
+                                    pictures={ albumPictures() }
+                                    maxSlides={4}
+                                    title={'All albums'}
                                 />
                             </div>
                             
 
+                            {
+                                SongsInAlbum([
+                                    {
+                                        name: 'Popular songs',
+                                        id: 'PopularSongsOfArtist',
+                                        images: [
+                                            ...getArtist.popularTracks.map(track => {
+                                                const picObj = track.album.images[0]
+    
+                                                return {
+                                                    title: track.name,
+                                                    url: picObj.url
+                                                }
+                                            })
+                                        ],
+                                        albumTracks: [ ...getArtist.popularTracks ]
+                                    }
+                                ])
+                            }
+                            
                             {
                                 SongsInAlbum(getArtist.albums)
                             }

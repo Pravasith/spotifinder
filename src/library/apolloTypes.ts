@@ -58,6 +58,7 @@ export const GET_ARTIST = gql`
                 name,
                 id,
                 preview_url,
+                duration_ms,
                 album{
                     images{
                         url

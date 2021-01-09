@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Howl } from 'howler'
 
 
@@ -9,7 +9,7 @@ import styles from '../../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../../assets/scss/libs/utils.module.scss'
 import titleCase from "../../library/titleCase"
 
-import { PlayButton } from "../../assets/SVGs/artistPageSVGs"
+import { PauseButton, PlayButton, StopButton } from "../../assets/SVGs/artistPageSVGs"
 
 type SongDataType = {
     name: string,
@@ -40,25 +40,15 @@ const convertToMinSex = (s: number) => {
 }
 
 
-type SoundType = {
-    name: string,
-    howl: Howl
-}
-
-const sounds: SoundType[] = []
 
 
-let x = {
-    howl: new Howl({
-        src: ['https://p.scdn.co/mp3-preview/900b03acc076e392f82955933dc0aa59e0d14f5a?cid=ff4cf933a12a45a780953348e3d33876'],
-        format: ['mp3', 'aac']
-    })
-}
+
 
 let currentlyPlaying: Howl | undefined, currentId: string | number
 
 export const SongsInAlbum = (albumData: AlbumDataType[]) => {
 
+    const [ activeSong, setActiveSong ] = useState('')
 
     useEffect(() => {
         return () => {
@@ -73,9 +63,39 @@ export const SongsInAlbum = (albumData: AlbumDataType[]) => {
 
 
     const playPause = (song: SongDataType) => {
+
+        if(activeSong === 'active-' + song.id)
         return (
             <button
                 className={ `${utilStyles.roundSVGButton}` }
+                key={ "KEY-" + song.id }
+                onClick={() => {
+
+                    if(!!currentlyPlaying){
+
+                        if(currentlyPlaying.playing()){
+                            currentlyPlaying.stop()
+                            setActiveSong('')
+                        }
+
+                        else {
+                            currentlyPlaying.play()
+                            currentlyPlaying.on('end', () => {
+                                setActiveSong('')
+                            })
+                        }
+                    }
+
+                }}
+                >
+                <StopButton/>
+            </button>
+        )
+
+        else return (
+            <button
+                className={ `${utilStyles.roundSVGButton}` }
+                key={ "KEY-" + song.id }
                 onClick={() => {
 
                     if(!!currentlyPlaying){
@@ -88,12 +108,14 @@ export const SongsInAlbum = (albumData: AlbumDataType[]) => {
                     })
 
 
-                    // console.log(song.preview_url)
 
 
                     currentlyPlaying.play()
-                    // console.log(sounds.filter(s => s.name === "Sound-" + song.id))
-                    // sounds.filter(s => s.name === "Sound-" + song.id)[0].howl.play()
+                    currentlyPlaying.on('end', () => {
+                        setActiveSong('')
+                    })
+
+                    setActiveSong('active-' + song.id)
 
                 }}
                 >

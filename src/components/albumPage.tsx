@@ -4,11 +4,11 @@
 import gsap from 'gsap'
 
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
 import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistPageSVGs'
-import { ImagePlaceHolderSVG, LeftArrow, RightArrow } from '../assets/SVGs/commonSVGs'
+import { ImagePlaceHolderSVG } from '../assets/SVGs/commonSVGs'
 import ImageSlider from './UIComponents/imageSlider'
 
 
@@ -130,7 +130,7 @@ const AlbumPage = () => {
     const pictureArray = new Array(23).fill(null).map((item, i) => {
         return {
             url: 'https://picsum.photos/200/200?random=' + i,
-            title: 'Ileana my love'
+            title: 'X asidpjaips asndijip'
         }
     })
 
@@ -152,12 +152,9 @@ const AlbumPage = () => {
         ))
     }
 
-    const deleteX = 'https://www.watchplaystream.com/files/people/photos/78/783180.jpg'
-    const deleteThis5 = 'https://static.toiimg.com/thumb/msid-75690174,imgsize-134498,width-800,height-600,resizemode-75/75690174.jpg'
-    const deleteThis4 = 'https://s3.india.com/wp-content/uploads/2019/11/pjimage-7-7.jpg'
-    const deleteThis2 = 'https://i.pinimg.com/originals/ff/9a/15/ff9a155e6b28d5e280dbd48690032a91.jpg'
-    const deleteThis3 = 'https://static.toiimg.com/photo/72106422.cms'
-    const deleteThis = 'https://www.filmibeat.com/ph-big/2016/07/ileana-d-cruz-holidays-with-her-boyfriend-andrew-kneebone-fiji_1467630331150.jpg'
+    const deleteX = 'https://tvline.com/wp-content/uploads/2020/01/one-piece-live-action.jpg'
+    
+    const deleteThis3 = 'https://piunikaweb.com/wp-content/uploads/2020/02/IMG_20200225_100835-934x523-1.jpg'
 
 
 
