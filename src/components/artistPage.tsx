@@ -171,7 +171,8 @@ const ArtistPage = (props: IArtistData) => {
         return getArtist.albums.map(album => {
             return {
                 title: album.name,
-                url: album.images[0].url
+                url: album.images[0].url,
+                id: album.id
             }
         })
     }
@@ -253,6 +254,7 @@ const ArtistPage = (props: IArtistData) => {
                                     pictures={ albumPictures() }
                                     maxSlides={4}
                                     title={'All albums'}
+                                    linkUrl={ '/album/' }
                                 />
                             </div>
                             

@@ -45,7 +45,7 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
             }
         })
 
-        if(!!searchQuery && isFirstRender.current) {
+        if(!!searchQuery && wrap.current && isFirstRender.current) {
             const offsetTopRelativeToViewport = wrap.current.getBoundingClientRect().top
             const h = (window.innerHeight - offsetTopRelativeToViewport) + 'px'
             // console.log(window.innerHeight, offsetTopRelativeToViewport)

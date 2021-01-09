@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         .then(result => result.data)
         .catch(e => console.log(e))
 
-        console.log(albumData)
+
     }
    
     

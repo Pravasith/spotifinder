@@ -32,6 +32,7 @@ import { LeftArrow, RightArrow } from '../../../assets/SVGs/commonSVGs'
 import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import styles from '../../../assets/scss/image_slider.module.scss'
 import { titleCase } from '../../../library/stringOps'
+import Link from 'next/link'
 
 
 
@@ -39,7 +40,8 @@ import { titleCase } from '../../../library/stringOps'
 
 interface ImgData {
     title: string,
-    url: string
+    url: string,
+    id: string
 }
 
 
@@ -49,7 +51,8 @@ const ImageSlider = memo((props: {
         id: string, // unique id
         title: string,
         pictures: ImgData[], // pictures array
-        maxSlides: number
+        maxSlides: number,
+        linkUrl?: string
     }) => {
 
     const [ slideWidthAndHeight, setSlideWidthAndHeight ] = useState({})
@@ -81,13 +84,7 @@ const ImageSlider = memo((props: {
 
 
 
-
     const { pictures, maxSlides } = props
-
-
-
-   
-
 
     const slide = ( direction: 'left' | 'right' ) => {
 
@@ -121,7 +118,6 @@ const ImageSlider = memo((props: {
 
                 if(currentSlideIteration.current === (noOfSets - 1)){
                     gsap.to(
-                        // `.${ styles.actualSlideWrappers }`,
                         sliderClassName,
                         {
                             duration: 0.2,
@@ -203,31 +199,54 @@ const ImageSlider = memo((props: {
 
     
         return pictures.map((item, i) => {
-            return (
-                <div 
-                    className={ `${styles.slideWrap} ${utilStyles.posRel}` }
+
+            const child = (
+                <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
+                    <div
+                        className={ `${styles.slideBgd}` }
+                        >
+                        <div className={ `${styles.picWrap} ${utilStyles.posRel}` }>
+                            <img
+                                className={ `${styles.actualPic} ${utilStyles.posAbs_NW}` }
+                                src={ item.url }
+                                alt=""
+                            />
+                        </div>
+
+                        <div className={ `${styles.footer} ${utilStyles.flexRow_Centre}` }>
+                            <p>{ titleCase(item.title) }</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            )
+
+            if(props.linkUrl) return (
+                <Link
+                    href={ (props.linkUrl as string) + item.id }
                     key={ 'imageSliderKey-' + "-" + i }
+                    >
+                    <a
+                        className={ `${styles.slideWrap} ${utilStyles.posRel}` }
+                        style={ slideWidthAndHeight }
+                        id={ 'individualSlide-' + props.id }
+                        >
+                        {
+                            child
+                        }
+                    </a>
+                </Link>
+            )
+
+            else return (
+                <div
+                    className={ `${styles.slideWrap} ${utilStyles.posRel}` }
                     style={ slideWidthAndHeight }
                     id={ 'individualSlide-' + props.id }
                     >
-                    <div className={ `${styles.slideInnerWrap} ${utilStyles.posAbs_NW}` }>
-                        <div
-                            className={ `${styles.slideBgd}` }
-                            >
-                            <div className={ `${styles.picWrap} ${utilStyles.posRel}` }>
-                                <img
-                                    className={ `${styles.actualPic} ${utilStyles.posAbs_NW}` }
-                                    src={ item.url }
-                                    alt=""
-                                />
-                            </div>
-    
-                            <div className={ `${styles.footer} ${utilStyles.flexRow_Centre}` }>
-                                <p>{ titleCase(item.title) }</p>
-                            </div>
-                        </div>
-                        
-                    </div>
+                    {
+                        child
+                    }
                 </div>
             )
         })

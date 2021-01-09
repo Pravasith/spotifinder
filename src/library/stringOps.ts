@@ -8,3 +8,20 @@ export function titleCase(str: string) {
     // Directly return the joined string
     return splitStr.join(' ')
 }
+
+
+export const convertToMinSex = (s: number) => {
+
+
+    var ms = s % 1000
+    s = (s - ms) / 1000
+    var secs = s % 60
+    s = (s - secs) / 60
+    var mins = s % 60
+
+    let result = mins + ':' + secs
+
+    result.length < 4 && (result = result + '0')
+
+    return result
+}

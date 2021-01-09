@@ -7,9 +7,9 @@ import { ImagePlaceHolderSVG } from "../../assets/SVGs/commonSVGs"
 
 import styles from '../../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../../assets/scss/libs/utils.module.scss'
-import { titleCase } from "../../library/stringOps"
+import { convertToMinSex, titleCase } from "../../library/stringOps"
 
-import { PauseButton, PlayButton, StopButton } from "../../assets/SVGs/artistAlbumPageSVGs"
+import { PlayButton, StopButton } from "../../assets/SVGs/artistAlbumPageSVGs"
 
 type SongDataType = {
     name: string,
@@ -28,17 +28,6 @@ type AlbumDataType = {
     albumTracks: SongDataType[]
 }
 
-const convertToMinSex = (s: number) => {
-
-
-    var ms = s % 1000
-    s = (s - ms) / 1000
-    var secs = s % 60
-    s = (s - secs) / 60
-    var mins = s % 60
-
-    return mins + ':' + secs
-}
 
 
 

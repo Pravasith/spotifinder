@@ -6,13 +6,17 @@ import Link from 'next/link'
 
 
 import { useEffect } from 'react'
+
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
+
 import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistAlbumPageSVGs'
 import { ImagePlaceHolderSVG } from '../assets/SVGs/commonSVGs'
+
 import { IAlbumData } from '../interfaces/pages'
 import { dynamicallyImportPackage } from '../library/dynamicImport'
 import { titleCase } from '../library/stringOps'
+import { SongsInAlbum } from './UIComponents/albumData'
 import ImageSlider from './UIComponents/imageSlider'
 
 
@@ -46,57 +50,6 @@ const AlbumPage = (props: IAlbumData) => {
                 }
             )
 
-            gsap.to(
-                `.${styles.topWrap}`,
-                {
-                    scrollTrigger: {
-                        scroller: `.${styles.rightSide}`,
-                        trigger: `.${styles.nakedBod}`,
-                        start: 'top center',
-                        scrub: 0.5,
-                        // markers: true,
-                        toggleActions: 'restart none none reverse'
-                    },
-                    duration: 0.2,
-                    opacity: 0,
-                }
-            )
-
-            gsap.to(
-                `.${styles.simArts}`,
-                {
-                    scrollTrigger: {
-                        scroller: `.${styles.rightSide}`,
-                        trigger: `.${styles.nakedBod}`,
-                        start: 'top 25%',
-                        // scrub: 0.5,
-                        // markers: true,
-                        toggleActions: 'restart none none reverse'
-                    },
-                    duration: 0.2,
-                    opacity: 1,
-                }
-            )
-
-            gsap.to(
-                `.${styles.simArts} .${styles.similarArtist}`,
-                {
-                    scrollTrigger: {
-                        scroller: `.${styles.rightSide}`,
-                        trigger: `.${styles.nakedBod}`,
-                        start: 'top 25%',
-                        // scrub: 0.5,
-                        // markers: true,
-                        toggleActions: 'restart none none reverse'
-                    },
-                    stagger: {
-                        amount: 0.25,
-                    },
-                    duration: 0.2,
-                    y: '-2em',
-                }
-            )
-            
 
         })
 
@@ -112,18 +65,19 @@ const AlbumPage = (props: IAlbumData) => {
 
     const { getAlbum } = props.albumData
 
-    const pictureArray = new Array(23).fill(null).map((item, i) => {
-        return {
-            url: 'https://picsum.photos/200/200?random=' + i,
-            title: 'X asidpjaips asndijip'
-        }
-    })
-
 
 
     const deleteX = 'https://tvline.com/wp-content/uploads/2020/01/one-piece-live-action.jpg'
     
-    const deleteThis3 = 'https://piunikaweb.com/wp-content/uploads/2020/02/IMG_20200225_100835-934x523-1.jpg'
+    const albumPictures = (albums: any) => {
+        return albums.map((album: any) => {
+            return {
+                title: album.name,
+                url: album.images[0].url,
+                id: album.id
+            }
+        })
+    }
 
 
 
@@ -135,7 +89,7 @@ const AlbumPage = (props: IAlbumData) => {
                     <div className={ `${styles.leftSide} ${utilStyles.flexCol_NW}` }>
                         <ImagePlaceHolderSVG
                             cn={ `${styles.coverPicture}` }
-                            imgSrc={deleteX}
+                            imgSrc={ getAlbum.images[0].url }
                         />                        
                     </div>
 
@@ -149,10 +103,6 @@ const AlbumPage = (props: IAlbumData) => {
                         <div className={ `${styles.topWrap} ${utilStyles.flexCol_NW}` }>
                             <div className={ `${styles.verified} ${utilStyles.flexRow_W}` }>
                                 <p>{ getAlbum.album_type.toUpperCase() }</p>
-
-                                <div className={ `${styles.verifiedIcon}` }>
-                                    <VerifiedIcon/>
-                                </div>
                             </div>
 
 
@@ -195,39 +145,50 @@ const AlbumPage = (props: IAlbumData) => {
                             </div>
 
                             <span className={ `${styles.line}` }></span>
-
-
                         </div>
 
 
 
                         <div className={ `${styles.nakedBod}` }>
-                            <div className={ `${styles.sliderWrap}` }>
-                                <ImageSlider
-                                    id={'slider-1'}
-                                    pictures={pictureArray}
-                                    maxSlides={5}
-                                    title={'Popular songs'}
-                                />
-                            </div>
+                            {
+                                SongsInAlbum([
+                                    {
+                                        name: 'Tracks',
+                                        id: 'SongsInAlbum',
+                                        images: [
 
-                            <div className={ `${styles.sliderWrap}` }>
-                                <ImageSlider
-                                    id={'slider-2'}
-                                    pictures={pictureArray}
-                                    maxSlides={3}
-                                    title={'Popular Albums'}
-                                />
-                            </div>
+                                            ...getAlbum.albumTracks.map(track => {
+                                                const picObj = getAlbum.images[0]
+    
+                                                return {
+                                                    title: track.name,
+                                                    url: picObj.url
+                                                }
+                                            })
+                                        ],
+                                        albumTracks: [ ...getAlbum.albumTracks ]
+                                    }
+                                ])
+                            }
 
-                            <div className={ `${styles.sliderWrap}` }>
-                                <ImageSlider
-                                    id={'slider-2'}
-                                    pictures={pictureArray}
-                                    maxSlides={4}
-                                    title={'Popular Albums'}
-                                />
-                            </div>
+                            {
+                                getAlbum.artists.map((artist, i) => {
+                                    return (
+                                        <div 
+                                            className={ `${styles.sliderWrap}` }
+                                            key={ 'artist-' + artist.id }
+                                            >
+                                            <ImageSlider
+                                                id={'AllAlbumsX' + i}
+                                                pictures={ albumPictures(artist.albums) }
+                                                maxSlides={4}
+                                                title={ `All ${ titleCase(artist.name) }'s Albums` }
+                                                linkUrl={'/album/'}
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     
                     

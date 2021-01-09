@@ -55,10 +55,14 @@ export interface IAlbumData {
             album_type: string,
             copyrights: string,
             release_date: string,
+            images: {
+                url: string
+            }[],
             albumTracks: {
                 name: string,
                 preview_url: string,
                 id: string,
+                duration_ms: number,
             }[]
             artists: {
                 name: string,
@@ -75,7 +79,7 @@ export interface IAlbumData {
                         id: string,
                         preview_url: string
                     }[]
-                }
+                }[]
             }[]
         }
     }

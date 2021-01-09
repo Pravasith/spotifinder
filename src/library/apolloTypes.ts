@@ -88,9 +88,13 @@ export const GET_ALBUM = gql`
             album_type,
             copyrights,
             release_date,
+            images{
+                url,
+            }
             albumTracks{
                 name,
                 preview_url,
+                duration_ms,
                 id,
             }
             artists{
