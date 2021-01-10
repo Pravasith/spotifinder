@@ -1,4 +1,5 @@
 @import './libs/vars';
+@import './libs/mixins';
 
 .container{
 
@@ -9,13 +10,12 @@
         // background: yellow;
 
         padding: 0 5vw;
-        min-height: 10vh;
+        min-height: 12vh;
 
         z-index: 2;
         position: absolute;
 
-        // width: 25%;
-        filter: drop-shadow(0 0 1em $transparentWhite);
+
     }
 
     .logo{
@@ -29,8 +29,28 @@
         // background: pink;
     }
 
-    
+    .fullSearchMode{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 0 5vw;
+        z-index: 2;
 
+        background: $transparentGray;
+        // @include blurredBackdrop;
+    }
+
+    .topStrip{
+
+        justify-content: space-between;
+        width: 100%;
+        // background: yellow;
+
+        // padding: 0 5vw;
+        min-height: 12vh;
+
+
+    }
 
 }
 

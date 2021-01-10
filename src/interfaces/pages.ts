@@ -73,11 +73,6 @@ export interface IAlbumData {
                     album_type: string,
                     images: {
                         url: string
-                    }[],
-                    albumTracks: {
-                        name: string,
-                        id: string,
-                        preview_url: string
                     }[]
                 }[]
             }[]

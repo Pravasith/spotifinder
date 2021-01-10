@@ -68,6 +68,36 @@ const AlbumPage = (props: IAlbumData) => {
 
 
     const deleteX = 'https://tvline.com/wp-content/uploads/2020/01/one-piece-live-action.jpg'
+
+
+
+    // const similarArtists = () => {
+
+    //     const arr = [ ...getRelatedArtists ].splice(0, 6)
+
+    //     return arr.map((item, i) => (
+    //         <Link
+    //             href={ '/artist/' + item.id }
+    //             key={'similar-artist-' + i}
+    //             >
+    //             <a>
+    //                <div 
+    //                     className={ `${styles.similarArtist} ${utilStyles.flexCol_N}` }
+                        
+    //                     >
+    //                     <img 
+    //                         className={ `${styles.artistPic}` }
+    //                         src={ item.images[item.images.length - 1].url }
+    //                     />
+
+    //                     <p className={ `${styles.artistName}` }>{ titleCase(item.name) }</p>
+    //                 </div> 
+    //             </a>
+                
+    //         </Link>
+    //     ))
+    // }
+
     
     const albumPictures = (albums: any) => {
         return albums.map((album: any) => {
@@ -90,7 +120,9 @@ const AlbumPage = (props: IAlbumData) => {
                         <ImagePlaceHolderSVG
                             cn={ `${styles.coverPicture}` }
                             imgSrc={ getAlbum.images[0].url }
-                        />                        
+                        />
+
+
                     </div>
 
 

@@ -25,9 +25,28 @@
     }
 
 
+    @keyframes rotating {
+        from {
+            -ms-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        to {
+            -ms-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
     .vinyl{
         width: 25%;
         filter: drop-shadow(0 0 1em $transparentBlue);
+        animation: rotating 25s linear infinite;
+
     }
 
     .vinylIcons{
@@ -46,7 +65,7 @@
 
     .homeText{
         margin: 1em;
-        max-width: 20vw;
+        max-width: 60vw;
         text-align: center;
     }
 

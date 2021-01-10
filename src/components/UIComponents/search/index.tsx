@@ -26,7 +26,7 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
     const isFirstRender = useRef(true)
 
     const [ showDropDown, setShowDropDown ] = useState(false)
-    
+
 
     const renders = useRef(0)
 
@@ -75,10 +75,10 @@ const Search = (props: { showAside: 'showAside' | 'hide' }) => {
             <div 
                 className={ `${styles.searchWrap} ${utilStyles.posRel}` }
                 onMouseEnter={() => setShowDropDown(true)}
-                    onMouseLeave={() => setShowDropDown(false)}
+                onMouseLeave={() => setShowDropDown(false)}
                     // onFocus={() => setShowDropDown(true)}
                     
-                    tabIndex={1}
+                    // tabIndex={1}
                 >
 
                 <div

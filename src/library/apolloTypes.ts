@@ -106,11 +106,6 @@ export const GET_ALBUM = gql`
                     album_type,
                     images{
                         url
-                    },
-                    albumTracks{
-                        name,
-                        id,
-                        preview_url
                     }
                 }
             }

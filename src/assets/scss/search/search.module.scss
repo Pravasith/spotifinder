@@ -257,9 +257,9 @@
             background: $transparentWhite;
             
 
-            .thumbnail{
-                filter: drop-shadow(0 0 1em $pureWhite);
-            }
+            // .thumbnail{
+            //     filter: drop-shadow(0 0 1em $pureWhite);
+            // }
         }
     }
 
@@ -292,7 +292,7 @@
 
     .nakedBod{
         width: 100%;
-        background: yellow;
+        // background: yellow;
         height: 100%;
     }
 

@@ -1,0 +1,1 @@
+NEXT_PUBLIC_AWS_URL=https://folio-pics.s3.eu-west-2.amazonaws.com

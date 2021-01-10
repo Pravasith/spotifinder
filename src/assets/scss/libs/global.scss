@@ -44,12 +44,12 @@ body {
 a {
 	font-family: "Calibre", sans-serif;
 	text-decoration: none;
-	color: $pureBlack;
+	color: $pureWhite;
 	
 
-	// &:hover{
-	// 	color: $highlightColor;
-	// }
+	&:hover{
+		text-decoration: underline;
+	}
 }
 
 // nav a{
@@ -151,6 +151,8 @@ input{
 	font-size: 1.15em;
 
 }
+
+
 
 
 

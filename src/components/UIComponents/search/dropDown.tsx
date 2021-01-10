@@ -147,12 +147,12 @@ const DropDown = memo((
                     </div>
                 </ul>
 
-                <ul>
+                {/* <ul>
                     <h2 className={ `${styles.suggestionLabel}` }>Songs</h2>
                     <div className={ `${styles.gridder}` }>
                         {  SuggestionListElements('track', tracks) }
                     </div>
-                </ul>
+                </ul> */}
             </div>
         )
     }
