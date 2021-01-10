@@ -10,10 +10,12 @@
   "dependencies": {
     "@apollo/client": "^3.3.6",
     "@types/howler": "^2.2.1",
+    "@types/nprogress": "^0.2.0",
     "graphql": "^15.4.0",
     "gsap": "^3.5.1",
     "howler": "^2.2.1",
     "next": "10.0.3",
+    "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sass": "^1.30.0"
