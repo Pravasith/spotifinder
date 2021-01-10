@@ -114,7 +114,7 @@ const ArtistPage = (props: IArtistData) => {
     
     let { getArtist, getRelatedArtists } = props.artistData
     
-
+    const deleteX = 'https://picsum.photos/200/200'
 
 
     const similarArtists = () => {
@@ -133,7 +133,7 @@ const ArtistPage = (props: IArtistData) => {
                         >
                         <img 
                             className={ `${styles.artistPic}` }
-                            src={ item.images[item.images.length - 1].url }
+                            src={ item.images.length !== 0 ? item.images[item.images.length - 1].url : deleteX }
                         />
 
                         <p className={ `${styles.artistName}` }>{ titleCase(item.name) }</p>
@@ -144,7 +144,7 @@ const ArtistPage = (props: IArtistData) => {
         ))
     }
 
-    const deleteX = 'https://picsum.photos/200/200'
+    
  
     function convertFollowers (labelValue: number) {
 

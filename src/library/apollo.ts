@@ -6,7 +6,6 @@ const uri = 'https://spotifinder-backend1.herokuapp.com/graphql'
 
 const link = createHttpLink({
     uri,
-    
     credentials: 'include'
 })
 
