@@ -92,6 +92,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   
     // Pass post data to the page via props
     return {
+        // Set the timeout for generating to 1 second
+        // This timeout could be longer depending on how often data changes
+        revalidate: 1,
         props : {
             albumData
         }
