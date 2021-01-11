@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
         // Set the timeout for generating to 1 second
         // This timeout could be longer depending on how often data changes
-        revalidate: 10,
+        revalidate: 15,
         props : {
             artistData
         }
