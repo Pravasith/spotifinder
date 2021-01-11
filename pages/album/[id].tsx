@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 }
             }
         )
-        .then(result => result.data)
+        .then(result => result.data) // x
         .catch(e => console.log(e))
 
 
