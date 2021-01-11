@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import Link from 'next/link'
 
 
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
@@ -24,7 +24,7 @@ import { Loader } from './UIComponents/loader'
 
 
 
-const AlbumPage = (props: IAlbumData) => {
+const AlbumPage = memo((props: IAlbumData) => {
 
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const AlbumPage = (props: IAlbumData) => {
 
         return (
             <div className={ `${styles.container} ${utilStyles.flexCol_Centre}` }>
-            <div className={ `${styles.absBigWrap} ${utilStyles.flexCol_Centre} ${utilStyles.posAbs_NW}` }>
+                <div className={ `${styles.absBigWrap} ${utilStyles.flexCol_Centre} ${utilStyles.posAbs_NW}` }>
                     <div className={ `${styles.header} ${utilStyles.flexRow_NW}` }>
 
                         <div className={ `${styles.leftSide} ${utilStyles.flexCol_NW}` }>
@@ -116,7 +116,7 @@ const AlbumPage = (props: IAlbumData) => {
                                     <div className={ `${styles.secondaryData} ${utilStyles.flexRow_Centre}` }>
                                         <p><span>Released in </span>{ " " + getAlbum.release_date }</p>
                                         <div className={ `${styles.dot}` }></div>
-                                        <p>{ getAlbum.albumTracks.length + " " }<span>Tracks</span></p>
+                                        <p>{ getAlbum.tracks.length + " " }<span>Tracks</span></p>
                                     </div>
                                     
                                 </div>
@@ -156,7 +156,7 @@ const AlbumPage = (props: IAlbumData) => {
                                             id: 'SongsInAlbum',
                                             images: [
 
-                                                ...getAlbum.albumTracks.map(track => {
+                                                ...getAlbum.tracks.map(track => {
                                                     const picObj = getAlbum.images[0]
         
                                                     return {
@@ -165,7 +165,7 @@ const AlbumPage = (props: IAlbumData) => {
                                                     }
                                                 })
                                             ],
-                                            albumTracks: [ ...getAlbum.albumTracks ]
+                                            albumTracks: [ ...getAlbum.tracks ]
                                         }
                                     ])
                                 }
@@ -206,6 +206,6 @@ const AlbumPage = (props: IAlbumData) => {
             <Loader/>
         </div>
     )
-}
+})
 
 export default AlbumPage

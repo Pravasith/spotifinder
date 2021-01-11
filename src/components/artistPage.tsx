@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import Link from 'next/link'
 
 
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import styles from '../assets/scss/album_artist_page.module.scss'
 import utilStyles from '../assets/scss/libs/utils.module.scss'
 import { CondorianoPP, VerifiedIcon } from '../assets/SVGs/artistAlbumPageSVGs'
@@ -20,7 +20,7 @@ import { Loader } from './UIComponents/loader'
 
 
 
-const ArtistPage = (props: IArtistData) => {
+const ArtistPage = memo((props: IArtistData) => {
 
     useEffect(() => {
 
@@ -310,6 +310,6 @@ const ArtistPage = (props: IArtistData) => {
             <Loader/>
         </div>
     )
-}
+})
 
 export default ArtistPage
