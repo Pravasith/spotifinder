@@ -265,7 +265,7 @@ const ArtistPage = memo((props: IArtistData) => {
                                             id: 'PopularSongsOfArtist',
                                             images: [
                                                 ...getArtist.popularTracks.map(track => {
-                                                    const picObj = track.album.images[0]
+                                                    const picObj = track.images[0]
         
                                                     return {
                                                         title: track.name,
@@ -279,7 +279,16 @@ const ArtistPage = memo((props: IArtistData) => {
                                 }
                                 
                                 {
-                                    SongsInAlbum(getArtist.albums)
+                                    SongsInAlbum([
+                                        ...getArtist.albums.map(item => {
+                                            return {
+                                                name: item.name,
+                                                id: item.id,
+                                                images: item.images,
+                                                albumTracks: item.tracks
+                                            }
+                                        })
+                                    ])
                                 }
 
                                 

@@ -116,7 +116,7 @@ const AlbumPage = memo((props: IAlbumData) => {
                                     <div className={ `${styles.secondaryData} ${utilStyles.flexRow_Centre}` }>
                                         <p><span>Released in </span>{ " " + getAlbum.release_date }</p>
                                         <div className={ `${styles.dot}` }></div>
-                                        <p>{ getAlbum.tracks.length + " " }<span>Tracks</span></p>
+                                        <p>{ getAlbum.albumTracks.length + " " }<span>Tracks</span></p>
                                     </div>
                                     
                                 </div>
@@ -156,7 +156,7 @@ const AlbumPage = memo((props: IAlbumData) => {
                                             id: 'SongsInAlbum',
                                             images: [
 
-                                                ...getAlbum.tracks.map(track => {
+                                                ...getAlbum.albumTracks.map(track => {
                                                     const picObj = getAlbum.images[0]
         
                                                     return {
@@ -165,7 +165,7 @@ const AlbumPage = memo((props: IAlbumData) => {
                                                     }
                                                 })
                                             ],
-                                            albumTracks: [ ...getAlbum.tracks ]
+                                            albumTracks: [ ...getAlbum.albumTracks ]
                                         }
                                     ])
                                 }

@@ -16,7 +16,7 @@ export interface IArtistData {
                 images: {
                     url: string
                 }[],
-                albumTracks: {
+                tracks: {
                     name: string,
                     id: string,
                     duration_ms: number,
@@ -28,11 +28,9 @@ export interface IArtistData {
                 id: string,
                 preview_url: string,
                 duration_ms: number,
-                album: {
-                    images: {
-                        url: string
-                    }[]
-                }
+                images: {
+                    url: string
+                }[]
             }[]
         },
 
@@ -58,7 +56,7 @@ export interface IAlbumData {
             images: {
                 url: string
             }[],
-            tracks: {
+            albumTracks: {
                 name: string,
                 preview_url: string,
                 id: string,

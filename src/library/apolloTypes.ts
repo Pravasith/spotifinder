@@ -48,7 +48,7 @@ export const GET_ARTIST = gql`
                 images{
                     url
                 },
-                albumTracks{
+                tracks{
                     name,
                     id,
                     preview_url,
@@ -60,10 +60,8 @@ export const GET_ARTIST = gql`
                 id,
                 preview_url,
                 duration_ms,
-                album{
-                    images{
-                        url
-                    }
+                images{
+                    url
                 }
             }
         }
@@ -90,7 +88,7 @@ export const GET_ALBUM = gql`
             images{
                 url,
             }
-            tracks{
+            albumTracks{
                 name,
                 preview_url,
                 duration_ms,
