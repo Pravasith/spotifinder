@@ -6,6 +6,7 @@ import utilStyles from '../../../assets/scss/libs/utils.module.scss'
 import { ImagePlaceHolderSVG } from "../../../assets/SVGs/commonSVGs"
 import Link from "next/link"
 import { titleCase } from "../../../library/stringOps"
+import { Loader } from "../loader"
 
 
 
@@ -44,7 +45,9 @@ const DropDown = memo((
 
         // console.log(!data)
         if(!data) {
-            if(loading) return <p>Loading ...</p>
+            if(loading) return (
+                <Loader/>
+            )
             return null
         }
 
@@ -163,11 +166,13 @@ const DropDown = memo((
             className={ `${styles.suggestionsWrap}` }
             >
             <div className={ `${styles.suggestions} ${utilStyles.flexRow_Centre}` }>
-                <aside className={ `${styles[props.showAside]}` }></aside>
+                {/* <aside className={ `${styles[props.showAside]}` }></aside>
                     {
                         <Suggestions/>
                     }
-                <aside className={ `${styles[props.showAside]}` }></aside>
+                <aside className={ `${styles[props.showAside]}` }></aside> */}
+
+                <Suggestions/>
             </div>
         </div>
 
