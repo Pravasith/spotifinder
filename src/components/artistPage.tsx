@@ -305,7 +305,7 @@ const ArtistPage = (props: IArtistData) => {
         )
     }
 
-    return (
+    else return (
         <div className={ `${styles.loader}` }>
             <Loader/>
         </div>

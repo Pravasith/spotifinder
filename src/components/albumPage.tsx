@@ -201,7 +201,7 @@ const AlbumPage = (props: IAlbumData) => {
         )
     }
 
-    return (
+    else return (
         <div className={ `${styles.loader}` }>
             <Loader/>
         </div>
