@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 export const GENERIC_SPOTIFY = `
     name,
@@ -6,7 +6,7 @@ export const GENERIC_SPOTIFY = `
     images{
         url, width
     }
-`
+`;
 
 export const SEARCH_SPOTIFY = gql`
     query SearchSpotify($query: String!) {
@@ -15,98 +15,93 @@ export const SEARCH_SPOTIFY = gql`
             searchFilter: ["track", "artist", "album"]
             limit: 5
         ){
-            artists{${ GENERIC_SPOTIFY }},
+            artists{${GENERIC_SPOTIFY}},
             albums{
-                ${ GENERIC_SPOTIFY },
+                ${GENERIC_SPOTIFY},
                 artistNames
             },
             tracks{
-                ${ GENERIC_SPOTIFY },
+                ${GENERIC_SPOTIFY},
                 artistNames
             }
 
         }
     }
-`
-
+`;
 
 export const GET_ARTIST = gql`
-    query ($id: String!)  {
-
-        getArtist(artistId: $id){
-            name,
-            id,
-            images{
+    query ($id: String!) {
+        getArtist(artistId: $id) {
+            name
+            id
+            images {
                 url
-            },
-            genres,
-            followers,
-            albums{
-                name,
-                id,
-                album_type,
-                images{
+            }
+            genres
+            followers
+            albums {
+                name
+                id
+                album_type
+                images {
                     url
-                },
-                tracks{
-                    name,
-                    id,
-                    preview_url,
+                }
+                tracks {
+                    name
+                    id
+                    preview_url
                     duration_ms
                 }
-            },
-            popularTracks{
-                name,
-                id,
-                preview_url,
-                duration_ms,
-                images{
+            }
+            popularTracks {
+                name
+                id
+                preview_url
+                duration_ms
+                images {
                     url
                 }
             }
         }
-            
-        getRelatedArtists(artistId: $id){
-            name,
-            id,
-            images{
+
+        getRelatedArtists(artistId: $id) {
+            name
+            id
+            images {
                 url
             }
         }
     }
-`
-
-
+`;
 
 export const GET_ALBUM = gql`
-    query ($albumId: String!)  {
-        getAlbum(albumId: $albumId){
-            name,
-            album_type,
-            copyrights,
-            release_date,
-            images{
-                url,
+    query ($albumId: String!) {
+        getAlbum(albumId: $albumId) {
+            name
+            album_type
+            copyrights
+            release_date
+            images {
+                url
             }
-            albumTracks{
-                name,
-                preview_url,
-                duration_ms,
-                id,
+            albumTracks {
+                name
+                preview_url
+                duration_ms
+                id
             }
-            artists{
-                name,
-                id,
-                albums{
-                    name,
-                    id,
-                    album_type,
-                    images{
+            artists {
+                name
+                id
+                albums {
+                    name
+                    id
+                    album_type
+                    images {
                         url
                     }
                 }
             }
         }
     }
-`
-  
+`;

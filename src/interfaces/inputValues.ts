@@ -1,3 +1,3 @@
 export default interface InputValues {
-    search? : string
+    search?: string;
 }
