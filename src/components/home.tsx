@@ -1,12 +1,12 @@
-import { ApolloProvider } from "@apollo/client";
-import { useEffect } from "react";
+import { ApolloProvider } from "@apollo/client"
+import { useEffect } from "react"
 
-import styles from "../assets/scss/home.module.scss";
-import utilStyles from "../assets/scss/libs/utils.module.scss";
-import { HomeVinylTrack, VinylIcons } from "../assets/SVGs/homeSVGs";
-import { client } from "../library/apollo";
+import styles from "../assets/scss/home.module.scss"
+import utilStyles from "../assets/scss/libs/utils.module.scss"
+import { HomeVinylTrack, VinylIcons } from "../assets/SVGs/homeSVGs"
+import { client } from "../library/apollo"
 
-import Search from "./UIComponents/search";
+import Search from "./UIComponents/search"
 
 const Home = () => {
     return (
@@ -48,7 +48,7 @@ const Home = () => {
                 </a>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

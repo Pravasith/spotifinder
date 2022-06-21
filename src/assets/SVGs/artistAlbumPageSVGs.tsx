@@ -20,7 +20,7 @@ export const CondorianoPP = () => (
             <circle cx="11.4" cy="6.2" r="5.2"></circle>
         </g>
     </svg>
-);
+)
 
 export const VerifiedIcon = () => (
     <svg
@@ -51,7 +51,7 @@ export const VerifiedIcon = () => (
             d="M7.6 15.8L11.2 19.4 20.4 10.2"
         ></path>
     </svg>
-);
+)
 
 export const PlayButton = () => (
     <svg
@@ -73,7 +73,7 @@ export const PlayButton = () => (
             opacity="0.5"
         ></path>
     </svg>
-);
+)
 
 export const PauseButton = () => (
     <svg
@@ -90,7 +90,7 @@ export const PauseButton = () => (
             d="M211.5 0C94.8-.1.1 94.3 0 210.6c-.1 117.3 94.1 211.9 211.2 211.9 116.8.1 211.6-94.5 211.6-211.1C422.8 94.7 328.3.1 211.5 0zM181 280.4c0 5.8-3 10.1-7.8 11.6-5 1.5-10.4-.4-13.1-4.7-1.4-2.2-1.9-4.6-1.9-7.1V139.9c0-7.4 4.8-12.6 11.3-12.6 6.7-.1 11.5 5.3 11.5 12.9v140.2zm83.3-70.7v69.9c0 4.2-.9 7.9-4.5 10.5-3.5 2.6-7.4 3-11.3 1.4-4.2-1.7-6.7-5-6.8-9.6-.2-8.2-.1-16.3-.1-24.5V140.1c0-5.3 1.7-9.5 6.6-11.8 4.2-2 8.1-1.3 11.7 1.4 3.5 2.7 4.3 6.4 4.3 10.6.1 23.1.1 46.3.1 69.4z"
         ></path>
     </svg>
-);
+)
 
 export const StopButton = () => (
     <svg
@@ -112,4 +112,4 @@ export const StopButton = () => (
             opacity="0.5"
         ></path>
     </svg>
-);
+)

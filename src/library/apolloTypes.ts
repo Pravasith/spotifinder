@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const GENERIC_SPOTIFY = `
     name,
@@ -6,7 +6,7 @@ export const GENERIC_SPOTIFY = `
     images{
         url, width
     }
-`;
+`
 
 export const SEARCH_SPOTIFY = gql`
     query SearchSpotify($query: String!) {
@@ -27,7 +27,7 @@ export const SEARCH_SPOTIFY = gql`
 
         }
     }
-`;
+`
 
 export const GET_ARTIST = gql`
     query ($id: String!) {
@@ -72,7 +72,7 @@ export const GET_ARTIST = gql`
             }
         }
     }
-`;
+`
 
 export const GET_ALBUM = gql`
     query ($albumId: String!) {
@@ -104,4 +104,4 @@ export const GET_ALBUM = gql`
             }
         }
     }
-`;
+`

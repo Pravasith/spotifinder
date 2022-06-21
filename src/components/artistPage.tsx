@@ -1,23 +1,23 @@
-import gsap from "gsap";
-import Link from "next/link";
+import gsap from "gsap"
+import Link from "next/link"
 
-import { memo, useEffect } from "react";
-import styles from "../assets/scss/album_artist_page.module.scss";
-import utilStyles from "../assets/scss/libs/utils.module.scss";
-import { CondorianoPP, VerifiedIcon } from "../assets/SVGs/artistAlbumPageSVGs";
-import { ImagePlaceHolderSVG } from "../assets/SVGs/commonSVGs";
+import { memo, useEffect } from "react"
+import styles from "../assets/scss/album_artist_page.module.scss"
+import utilStyles from "../assets/scss/libs/utils.module.scss"
+import { CondorianoPP, VerifiedIcon } from "../assets/SVGs/artistAlbumPageSVGs"
+import { ImagePlaceHolderSVG } from "../assets/SVGs/commonSVGs"
 
-import { IArtistData } from "../interfaces/pages";
-import { dynamicallyImportPackage } from "../library/dynamicImport";
-import { titleCase } from "../library/stringOps";
-import { SongsInAlbum } from "./UIComponents/albumData";
-import ImageSlider from "./UIComponents/imageSlider";
-import { Loader } from "./UIComponents/loader";
+import { IArtistData } from "../interfaces/pages"
+import { dynamicallyImportPackage } from "../library/dynamicImport"
+import { titleCase } from "../library/stringOps"
+import { SongsInAlbum } from "./UIComponents/albumData"
+import ImageSlider from "./UIComponents/imageSlider"
+import { Loader } from "./UIComponents/loader"
 
 const ArtistPage = memo((props: IArtistData) => {
     useEffect(() => {
         dynamicallyImportPackage().then(ScrollTrigger => {
-            gsap.registerPlugin(ScrollTrigger as GSAPPlugin);
+            gsap.registerPlugin(ScrollTrigger as GSAPPlugin)
 
             gsap.to(`.${styles.fixedStrip}`, {
                 scrollTrigger: {
@@ -29,7 +29,7 @@ const ArtistPage = memo((props: IArtistData) => {
                 },
                 duration: 0.2,
                 y: "0%",
-            });
+            })
 
             gsap.to(`.${styles.simArts}`, {
                 scrollTrigger: {
@@ -42,7 +42,7 @@ const ArtistPage = memo((props: IArtistData) => {
                 },
                 duration: 0.2,
                 opacity: 1,
-            });
+            })
 
             gsap.to(`.${styles.simArts} .${styles.similarArtist}`, {
                 scrollTrigger: {
@@ -58,16 +58,16 @@ const ArtistPage = memo((props: IArtistData) => {
                 },
                 duration: 0.2,
                 y: "-2em",
-            });
-        });
-    }, []);
+            })
+        })
+    }, [])
 
-    let { getArtist, getRelatedArtists } = props.artistData;
+    let { getArtist, getRelatedArtists } = props.artistData
 
-    const deleteX = "https://picsum.photos/200/200";
+    const deleteX = "https://picsum.photos/200/200"
 
     const similarArtists = () => {
-        const arr = [...getRelatedArtists].splice(0, 6);
+        const arr = [...getRelatedArtists].splice(0, 6)
 
         return arr.map((item, i) => (
             <Link href={"/artist/" + item.id} key={"similar-artist-" + i}>
@@ -90,8 +90,8 @@ const ArtistPage = memo((props: IArtistData) => {
                     </div>
                 </a>
             </Link>
-        ));
-    };
+        ))
+    }
 
     const convertFollowers = (labelValue: number) => {
         // Nine Zeroes for Billions
@@ -103,8 +103,8 @@ const ArtistPage = memo((props: IArtistData) => {
             : // Three Zeroes for Thousands
             Math.abs(Number(labelValue)) >= 1.0e3
             ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(2) + "K"
-            : Math.abs(Number(labelValue));
-    };
+            : Math.abs(Number(labelValue))
+    }
 
     // alert(test(6800000)); // this outputs 6.8M
 
@@ -114,9 +114,9 @@ const ArtistPage = memo((props: IArtistData) => {
                 title: album.name,
                 url: album.images[0].url,
                 id: album.id,
-            };
-        });
-    };
+            }
+        })
+    }
 
     return (
         <div className={`${styles.container} ${utilStyles.flexCol_Centre}`}>
@@ -226,12 +226,12 @@ const ArtistPage = memo((props: IArtistData) => {
                                     images: [
                                         ...getArtist.popularTracks.map(
                                             track => {
-                                                const picObj = track.images[0];
+                                                const picObj = track.images[0]
 
                                                 return {
                                                     title: track.name,
                                                     url: picObj.url,
-                                                };
+                                                }
                                             }
                                         ),
                                     ],
@@ -246,7 +246,7 @@ const ArtistPage = memo((props: IArtistData) => {
                                         id: item.id,
                                         images: item.images,
                                         albumTracks: item.tracks,
-                                    };
+                                    }
                                 }),
                             ])}
 
@@ -263,7 +263,7 @@ const ArtistPage = memo((props: IArtistData) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})
 
-export default ArtistPage;
+export default ArtistPage

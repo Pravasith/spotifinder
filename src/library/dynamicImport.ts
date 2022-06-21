@@ -1,5 +1,5 @@
 export const dynamicallyImportPackage = async () => {
-    let allMods = {};
+    let allMods = {}
 
     // Importing trackball controls and GLTFLoader
     await Promise.all([
@@ -11,10 +11,10 @@ export const dynamicallyImportPackage = async () => {
                 allMods = {
                     ...allMods,
                     ...item,
-                };
-            });
+                }
+            })
         })
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
 
-    return allMods;
-};
+    return allMods
+}

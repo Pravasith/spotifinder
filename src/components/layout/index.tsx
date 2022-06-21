@@ -7,26 +7,19 @@ type Props = {
     children: ReactNode
 }
 
-
-const Layout = ( props: Props ) => {
+const Layout = (props: Props) => {
     const { children } = props
 
     const PageContent = () => (
-        <div
-            className={ `${ styles.container }` }
-            >
-            <Navbar/>
-            <main className = "main">
-                {
-                    children
-                }
-            </main>
+        <div className={`${styles.container}`}>
+            <Navbar />
+            <main className="main">{children}</main>
         </div>
     )
 
     return (
         <>
-            <PageContent/>
+            <PageContent />
         </>
     )
 }
